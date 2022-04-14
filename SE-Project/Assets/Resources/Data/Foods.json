@@ -1,1 +1,23 @@
-[{"ID":123,"Name":"Test","Description":"asdf","Image":"asdf","Material":123},{"ID":123,"Name":"Test","Description":"asdf","Image":"asdf","Material":123},{"ID":123,"Name":"Test","Description":"asdf","Image":"asdf","Material":123}]
+[
+  {
+    "ID": 0,
+    "Name": "name",
+    "Description": "Food to test",
+    "Image": "Sprite/0",
+    "Material": 1001034
+  },
+  {
+    "ID": 1,
+    "Name": "name",
+    "Description": "Food to test",
+    "Image": "Sprite/1",
+    "Material": 1001034
+  },
+  {
+    "ID": 2,
+    "Name": "name",
+    "Description": "Food to test",
+    "Image": "Sprite/2",
+    "Material": 1001034
+  }
+]

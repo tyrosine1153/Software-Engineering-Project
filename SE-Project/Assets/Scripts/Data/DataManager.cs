@@ -11,6 +11,8 @@ public class DataManager : Singleton<DataManager>
 {
     public static string DataPath;
     public Food[] Foods;
+    public StoryScenario[] StoryScenario;
+    public Character[] Characters;
     
     protected override void Awake()
     {
@@ -18,26 +20,38 @@ public class DataManager : Singleton<DataManager>
 
         DataPath = Path.Combine(Application.dataPath, "Resources/Data");
         Foods = LoadByCsv<Food>(DataPath, "Foods").ToArray();
+        StoryScenario = LoadByJson<StoryScenario>(DataPath, "StoryScenario").ToArray();
+        Characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
     }
     
+    public static bool TryMakeFood(int[] materialCount, ref Food result)
+    {
+        var material = 0;
+        for (int i = 0; i < materialCount.Length; i++)
+        {
+            material += materialCount[i] * (10 ^ i);
+        }
+
+        foreach (var food in DataManager.Instance.Foods)
+        {
+            if (food.Material == material)
+            {
+                result = food;
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    #region File IO
     public static void SaveByJson<T>(string filePath, string fileName, T obj)
     {
-        var fileStream = new FileStream($"{filePath}/{fileName}.json", FileMode.Create);
-        var jsonData = JsonConvert.SerializeObject(obj);
-        var data = Encoding.UTF8.GetBytes(jsonData);
-        fileStream.Write(data, 0, data.Length);  // byte로 인코딩 한 것을 파일스트림에 작성
-        fileStream.Close();
+        File.WriteAllText($"{filePath}/{fileName}.json", JsonConvert.SerializeObject(obj, Formatting.Indented));
     }
     
-    public static T LoadByJson<T>(string filePath, string fileName)
+    public static IEnumerable<T> LoadByJson<T>(string filePath, string fileName)
     {
-        var fileStream = new FileStream($"{filePath}/{fileName}.json", FileMode.Open);
-        var data = new byte[fileStream.Length];
-        var jsonData = Encoding.UTF8.GetString(data);
-        fileStream.Read(data, 0, data.Length);
-        fileStream.Close();
-
-        return JsonConvert.DeserializeObject<T>(jsonData);
+        return JsonConvert.DeserializeObject<IEnumerable<T>>(File.ReadAllText($"{filePath}/{fileName}.json"));
     }
 
     public static void SaveByCsv<T>(string filePath, string fileName, IEnumerable<T> records)
@@ -68,4 +82,5 @@ public class DataManager : Singleton<DataManager>
 
         return result;
     }
+    #endregion
 }
