@@ -9,7 +9,8 @@
     "Characters": [
       { "CharacterID": 0, "Emotion": 0 },
       { "CharacterID": 1, "Emotion": 1 },
-      { "CharacterID": 2, "Emotion": 2 }
+      null,
+      { "CharacterID": 3, "Emotion": 2 }
     ]
   },
   {
@@ -22,7 +23,8 @@
     "Characters": [
       { "CharacterID": 0, "Emotion": 0 },
       { "CharacterID": 1, "Emotion": 1 },
-      { "CharacterID": 2, "Emotion": 2 }
+      null,
+      { "CharacterID": 3, "Emotion": 2 }
     ]
   },
   {
@@ -35,7 +37,8 @@
     "Characters": [
       { "CharacterID": 0, "Emotion": 0 },
       { "CharacterID": 1, "Emotion": 1 },
-      { "CharacterID": 2, "Emotion": 2 }
+      null,
+      { "CharacterID": 3, "Emotion": 2 }
     ]
   }
 ]

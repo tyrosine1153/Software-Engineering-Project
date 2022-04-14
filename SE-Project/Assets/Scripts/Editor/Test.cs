@@ -43,7 +43,8 @@ public static class Test
                 {
                     new CharacterAct(0, CharacterEmotionType.Idle), 
                     new CharacterAct(1, CharacterEmotionType.Happy),
-                    new CharacterAct(2, CharacterEmotionType.Sad),
+                    null,
+                    new CharacterAct(3, CharacterEmotionType.Sad),
                 },
             };
             scenario.Add(storyScenario);
