@@ -2,8 +2,6 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using CsvHelper;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -56,31 +54,12 @@ public class DataManager : Singleton<DataManager>
 
     public static void SaveByCsv<T>(string filePath, string fileName, IEnumerable<T> records)
     {
-        using var writer = new StreamWriter($"{filePath}/{fileName}.csv");
-        using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-        csv.WriteHeader<T>();
-        csv.NextRecord();
-        foreach (var record in records)
-        {
-            csv.WriteRecord(record);
-            csv.NextRecord();
-        }
+        
     }
     
     public static IEnumerable<T> LoadByCsv<T>(string filePath, string fileName)
     {
-        var result = new List<T>();
-        using var reader = new StreamReader($"{filePath}/{fileName}.csv");
-        using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-        csv.Read();
-        csv.ReadHeader();
-        while (csv.Read())
-        {
-            var record = csv.GetRecord<T>();
-            result.Add(record);
-        }
-
-        return result;
+        return CSVSerializer.Deserialize<T>(File.ReadAllText($"{filePath}/{fileName}.csv"));
     }
     #endregion
 }

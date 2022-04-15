@@ -1,4 +1,4 @@
-﻿public class StoryScenario  // json
+﻿public struct StoryScenario  // json
 {
     public int ID { get; set; }
     public int PrevId { get; set; }
@@ -20,7 +20,7 @@ public enum EffectType
     Illustration, // -1 : None, 0~n : illustration id
 }
 
-public class Character  // csv
+public struct Character  // json
 {
     public int ID { get; set; }
     public string Name { get; set; }

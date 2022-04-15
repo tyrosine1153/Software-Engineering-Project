@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.joshclose.csvhelper": {
-      "version": "https://github.com/yoshida190/CsvHelper.git#upm",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "8f94c105b347dbc7fd8375960a373928851c6895"
-    },
     "com.unity.2d.animation": {
       "version": "5.0.4",
       "depth": 0,
