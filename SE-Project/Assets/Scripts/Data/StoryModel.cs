@@ -9,15 +9,15 @@
     public int[] Effects { get; set; }  // 일러스트는 나중에 이미지 경로로 대체할지 고민중
     
     public CharacterAct[] Characters { get; set; }
+    
+    public OrderOption[] Order { get; set; }
 }
 
-// Index of Effects array in StoryScenario
-public enum EffectType
+public struct EndingPoint // json
 {
-    None, // if it is 0, it means no effect
-    Dark, // -3 : All, -2 : Others, -1 : None, 0~n : Position
-    Zoom, // -1 : None, 0~n : Position
-    Illustration, // -1 : None, 0~n : illustration id
+    public int ID { get; set; }
+    public int NextScenarioID { get; set; }
+    public int Result { get; set; }  // 결과값 (임시)
 }
 
 public struct Character  // json
@@ -26,6 +26,15 @@ public struct Character  // json
     public string Name { get; set; }
     public string Description { get; set; }
     public CharacterEmotionType[] Emotion { get; set; }
+}
+
+// Index of Effects array in StoryScenario
+public enum EffectType
+{
+    None, // if it is 1, it means no effect
+    Dark, // -3 : All, -2 : Others, -1 : None, 0~n : Position
+    Zoom, // -1 : None, 0~n : Position
+    Illustration, // -1 : None, 0~n : illustration id
 }
 
 public enum CharacterEmotionType
@@ -37,13 +46,28 @@ public enum CharacterEmotionType
 
 public class CharacterAct
 {
-    public int CharacterID { get; set; }
+    public int CharacterId { get; set; }
     public CharacterEmotionType Emotion { get; set; }    
     
-    public CharacterAct(int id, CharacterEmotionType emotion)
+    public CharacterAct(int characterId, CharacterEmotionType emotion)
     {
-        CharacterID = id;
+        CharacterId = characterId;
         Emotion = emotion;
     }
 }
 
+public struct OrderOption
+{
+    // FoodID에 따라 결정되는 NextScenarioID, Result의 모임 자료형
+    // -1의 경우 정의된 옵션 외의 값을 뜻함
+    public int FoodID { get; set; }
+    public int NextScenarioID { get; set; }
+    public int Result { get; set; }  // 결과값 (임시) 
+    
+    public OrderOption(int foodID, int nextScenarioID, int result)
+    {
+        FoodID = foodID;
+        NextScenarioID = nextScenarioID;
+        Result = result;
+    }
+}

@@ -95,9 +95,16 @@ public class MainCanvas : MonoBehaviour
             fullScreenToggle.isOn = VideoManager.Instance.currentFullscreen;
         });
         
-        effectToggle.onValueChanged.AddListener(_ => { });
+        effectToggle.onValueChanged.AddListener(_ => { /* Todo */ });
         
-        storyButton.onClick.AddListener(() => { });
-        storySkipButton.onClick.AddListener(() => { });
+        // 세이브 데이터를 가져와 스토리 버튼 활성화 여부를 결정한다. 게임을 처음 켜는 경우는 스토리 버튼을 활성화하지 않는다.
+        storyButton.onClick.AddListener(() =>
+        {
+            storyPanel.SetActive(true);
+        });
+        storySkipButton.onClick.AddListener(() =>
+        {
+            storyPanel.SetActive(false);
+        });
     }
 }
