@@ -56,6 +56,7 @@ public class StoryManager : MonoBehaviour
 
         if (previousStoryId == -1)
         {
+            
             // 이전으로 돌아가기가 막힘
             return;
         }
