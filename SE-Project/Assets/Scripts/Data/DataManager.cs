@@ -18,10 +18,10 @@ public class DataManager : Singleton<DataManager>
         base.Awake();
 
         DataPath = Path.Combine(Application.dataPath, "Resources/Data");
-        
         Foods = LoadByCsv<Food>(DataPath, "Foods").ToArray();
         StoryScenario = LoadByJson<StoryScenario>(DataPath, "StoryScenario").ToArray();
         Characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
+        
         EndingPoints = LoadByJson<EndingPoint>(DataPath, "EndingPoints").ToList();
 
         StoryScenario = StoryScenario.OrderBy(s => s.ID).ToArray();

@@ -89,7 +89,7 @@
   {
     "ID": 3,
     "PrevId": 2,
-    "NextId": 4,
+    "NextId": -1,
     "Speaker": "Speaker",
     "Content": "The Quick Brown Fox Jumps Over The Lazy Dog",
     "Effects": [
