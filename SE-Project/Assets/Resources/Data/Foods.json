@@ -3,21 +3,33 @@
     "ID": 0,
     "Name": "name",
     "Description": "Food to test",
-    "Image": "Sprite/0",
-    "Material": 1001034
+    "PotionType": 0,
+    "Material": [
+      -1,
+      0,
+      1
+    ]
   },
   {
     "ID": 1,
     "Name": "name",
     "Description": "Food to test",
-    "Image": "Sprite/1",
-    "Material": 1001034
+    "PotionType": 0,
+    "Material": [
+      0,
+      1,
+      2
+    ]
   },
   {
     "ID": 2,
     "Name": "name",
     "Description": "Food to test",
-    "Image": "Sprite/2",
-    "Material": 1001034
+    "PotionType": 0,
+    "Material": [
+      1,
+      2,
+      3
+    ]
   }
 ]

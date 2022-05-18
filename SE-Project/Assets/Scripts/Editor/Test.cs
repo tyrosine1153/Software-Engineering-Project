@@ -16,22 +16,20 @@ public static class Test
     {
         int i;
 
-        var foods = new List<Food>();
+        var potions = new List<Potion>();
         for (i = 0; i < 3; i++)
         {
-            var food = new Food
+            var food = new Potion
             {
                 ID = i,
                 Name = "name",
                 Description = "Food to test",
-                Image = $"{SpritePathInResource}/{i}",
-                Material = 1001034,
+                Material = new[] {i - 1, i, i + 1},
             };
-            foods.Add(food);
+            potions.Add(food);
         }
 
-        DataManager.SaveByJson(DataPath, "Foods", foods);
-        DataManager.SaveByCsv(DataPath, "Foods", foods);
+        DataManager.SaveByJson(DataPath, "Foods", potions);
 
         var scenario = new List<StoryScenario>();
         for (i = 0; i < 3; i++)
@@ -160,24 +158,24 @@ public static class Test
     }
 
     // 스토리 분기 로직
-    public static void StoryServeTest(Food food)
+    public static void StoryServeTest(Potion potion)
     {
         var currentStory = DataManager.Instance.StoryScenario[3]; // 임시 값 (필드)
         var order = currentStory.Order; // 임시 order 값(필드) : read에서 저장했다는 전재
 
         var log = new StringBuilder();
-        log.AppendLine($"Food id : {food.ID}");
+        log.AppendLine($"Potion id : {potion.ID}");
         
         OrderOption matchingOrder;
         try
         {
-            matchingOrder = order.First(o => o.FoodID == food.ID);
+            matchingOrder = order.First(o => o.PotionId == potion.ID);
         }
         catch (Exception e)
         {
-            matchingOrder = order.FirstOrDefault(o => o.FoodID == -1);
+            matchingOrder = order.FirstOrDefault(o => o.PotionId == -1);
         }
-        log.AppendLine($"Serve Result : {matchingOrder.FoodID} {matchingOrder.NextScenarioID} {matchingOrder.Result}");
+        log.AppendLine($"Serve Result : {matchingOrder.PotionId} {matchingOrder.NextScenarioID} {matchingOrder.Result}");
 
         var endingPoint = new EndingPoint
         {
@@ -194,10 +192,10 @@ public static class Test
     [MenuItem("Tools/Save Game Story Point")]
     public static void StoryServeTest()
     {
-        var food = new Food
+        var potion = new Potion
         {
             ID = 9
         };
-        StoryServeTest(food);
+        StoryServeTest(potion);
     }
 }

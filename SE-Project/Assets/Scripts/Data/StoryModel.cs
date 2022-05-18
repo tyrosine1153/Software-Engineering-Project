@@ -58,15 +58,15 @@ public class CharacterAct
 
 public struct OrderOption
 {
-    // FoodID에 따라 결정되는 NextScenarioID, Result의 모임 자료형
+    // PotionID에 따라 결정되는 NextScenarioID, Result의 모임 자료형
     // -1의 경우 정의된 옵션 외의 값을 뜻함
-    public int FoodID { get; set; }
+    public int PotionId { get; set; }
     public int NextScenarioID { get; set; }
     public int Result { get; set; }  // 결과값 (임시) 
     
-    public OrderOption(int foodID, int nextScenarioID, int result)
+    public OrderOption(int potionId, int nextScenarioID, int result)
     {
-        FoodID = foodID;
+        PotionId = potionId;
         NextScenarioID = nextScenarioID;
         Result = result;
     }

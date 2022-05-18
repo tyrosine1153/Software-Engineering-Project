@@ -115,22 +115,22 @@
     ],
     "Order": [
       {
-        "FoodID": 0,
+        "PotionId": 0,
         "NextScenarioID": 4,
         "Result": 0
       },
       {
-        "FoodID": 1,
+        "PotionId": 1,
         "NextScenarioID": 5,
         "Result": 1
       },
       {
-        "FoodID": 2,
+        "PotionId": 2,
         "NextScenarioID": 6,
         "Result": 2
       },
       {
-        "FoodID": -1,
+        "PotionId": -1,
         "NextScenarioID": 7,
         "Result": 3
       }
