@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
@@ -8,7 +9,7 @@ public class DataManager : Singleton<DataManager>
 {
     public static string DataPath;
     
-    public Food[] Foods;
+    public Potion[] Potions;
     public StoryScenario[] StoryScenario;
     public Character[] Characters;
     public List<EndingPoint> EndingPoints;
@@ -18,7 +19,9 @@ public class DataManager : Singleton<DataManager>
         base.Awake();
 
         DataPath = Path.Combine(Application.dataPath, "Resources/Data");
-        Foods = LoadByCsv<Food>(DataPath, "Foods").ToArray();
+        
+        Potions = LoadByCsv<Potion>(DataPath, "Potions").ToArray();
+
         StoryScenario = LoadByJson<StoryScenario>(DataPath, "StoryScenario").ToArray();
         Characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
         
@@ -27,25 +30,22 @@ public class DataManager : Singleton<DataManager>
         StoryScenario = StoryScenario.OrderBy(s => s.ID).ToArray();
     }
 
-    public static bool TryMakeFood(int[] materialCount, ref Food result)
+    public static bool TryMakePotion(int[] materialCount, ref Potion result)
     {
-        var material = 0;
-        for (int i = 0; i < materialCount.Length; i++)
+        if (materialCount.Length != Enum.GetValues(typeof(Potion)).Length) return false;
+
+        foreach (var potion in Instance.Potions)
         {
-            material += materialCount[i] * (10 ^ i);
+            if (potion.Material.Length != Enum.GetValues(typeof(Potion)).Length) return false;
+            if (potion.Material.Where((t, i) => t != materialCount[i]).Any()) continue;
+
+            result = potion;
+            return true;
         }
 
-        foreach (var food in Instance.Foods)
-        {
-            if (food.Material == material)
-            {
-                result = food;
-                return true;
-            }
-        }
         return false;
     }
-    
+
     #region Save/Load
     public void SaveGameStoryPoint(int scenarioId)
     {
