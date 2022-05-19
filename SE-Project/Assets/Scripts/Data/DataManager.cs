@@ -21,8 +21,10 @@ public class DataManager : Singleton<DataManager>
         DataPath = Path.Combine(Application.dataPath, "Resources/Data");
         
         Potions = LoadByCsv<Potion>(DataPath, "Potions").ToArray();
+
         StoryScenario = LoadByJson<StoryScenario>(DataPath, "StoryScenario").ToArray();
         Characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
+        
         EndingPoints = LoadByJson<EndingPoint>(DataPath, "EndingPoints").ToList();
 
         StoryScenario = StoryScenario.OrderBy(s => s.ID).ToArray();
