@@ -100,7 +100,7 @@ public class StoryManager : Singleton<StoryManager>
         craftCanvas.SetActive(false);
     }
 
-    public void GetFoodStory(Food food)
+    public void GetFoodStory(Potion food)
     {
         print(_currentStoryId);
         var story = DataManager.Instance.StoryScenario[_currentStoryId];
@@ -108,7 +108,8 @@ public class StoryManager : Singleton<StoryManager>
         var find = false;
         foreach (var order in story.Order)
         {
-            if (order.FoodID != food.ID) continue;
+            
+            if (order.PotionId != food.ID) continue;
 
             // Show Result
             // isNewFoodReceipt = true or false;

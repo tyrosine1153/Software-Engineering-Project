@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -80,7 +81,7 @@ public class CraftManager : MonoBehaviour
         var m = count[(int) PotionMaterials.Magenta];
         
         ResetCraftData();
-        var foodId = PotionToFoodId(r, g, b, c, y, m);
+        var foodId = PotionToPotionId(r, g, b, c, y, m);
         var food = FindFood(foodId);
         if (food.ID == -1)
         {
@@ -91,33 +92,27 @@ public class CraftManager : MonoBehaviour
         StoryManager.Instance.GetFoodStory(food);
     }
 
-    private static int PotionToFoodId(int r, int g, int b, int c, int y, int m)
+    private static int[] PotionToPotionId(int r, int g, int b, int c, int y, int m)
     {
-        // 임시 로직
-        var craftData = new[] {r, g, b, c, y, m, 1};
-        var foodId = 0;
-        var n = 1;
-        foreach (var i in craftData)
-        {
-            foodId += i * n;
-            n *= 10;
-        }
-
-        print(foodId);
-        return foodId;
+        return new[] {r - c, g - y, b - m};
     }
 
-    private static Food FindFood(int foodId)
+    private static Potion FindFood(int[] foodId)
     {
-        foreach (var food in DataManager.Instance.Foods)
+        foreach (var potion in DataManager.Instance.Potions)
         {
-            if (food.Material == foodId) return food;
+            if (CompareMaterial(potion, foodId)) return potion;
         }
 
-        return new Food()
+        return new Potion()
         {
             ID = -1
         };
+    }
+
+    private static bool CompareMaterial(Potion potion, int[] potionId )
+    {
+        return !potionId.Where((potionIdIndex, i) => potion.Material[i] != potionIdIndex).Any();
     }
     
     private void Start()
