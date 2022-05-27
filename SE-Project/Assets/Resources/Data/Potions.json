@@ -2,7 +2,7 @@
   {
     "ID": 0,
     "Name": "name",
-    "Description": "Food to test",
+    "Description": "Potions to test",
     "PotionType": 0,
     "Material": [
       -1,
@@ -13,7 +13,7 @@
   {
     "ID": 1,
     "Name": "name",
-    "Description": "Food to test",
+    "Description": "Potions to test",
     "PotionType": 0,
     "Material": [
       0,
@@ -24,7 +24,7 @@
   {
     "ID": 2,
     "Name": "name",
-    "Description": "Food to test",
+    "Description": "Potions to test",
     "PotionType": 0,
     "Material": [
       1,

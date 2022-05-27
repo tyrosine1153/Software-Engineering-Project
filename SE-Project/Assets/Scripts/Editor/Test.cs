@@ -23,13 +23,13 @@ public static class Test
             {
                 ID = i,
                 Name = "name",
-                Description = "Food to test",
+                Description = "Potions to test",
                 Material = new[] {i - 1, i, i + 1},
             };
             potions.Add(food);
         }
 
-        DataManager.SaveByJson(DataPath, "Foods", potions);
+        DataManager.SaveByJson(DataPath, "Potions", potions);
 
         var scenario = new List<StoryScenario>();
         for (i = 0; i < 3; i++)
@@ -186,7 +186,6 @@ public static class Test
 
         DataManager.Instance.SaveGameStoryPoint(endingPoint);
         log.AppendLine($"Save EndingPoint : {endingPoint.ID} {endingPoint.NextScenarioID} {endingPoint.Result}");
-        order = null;
     }
 
     [MenuItem("Tools/Save Game Story Point")]

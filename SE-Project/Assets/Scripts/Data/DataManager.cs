@@ -20,18 +20,17 @@ public class DataManager : Singleton<DataManager>
 
         DataPath = Path.Combine(Application.dataPath, "Resources/Data");
         
-        Potions = LoadByCsv<Potion>(DataPath, "Potions").ToArray();
-
+        Potions = LoadByJson<Potion>(DataPath, "Potions").ToArray();
         StoryScenario = LoadByJson<StoryScenario>(DataPath, "StoryScenario").ToArray();
         Characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
-        
         EndingPoints = LoadByJson<EndingPoint>(DataPath, "EndingPoints").ToList();
 
         StoryScenario = StoryScenario.OrderBy(s => s.ID).ToArray();
     }
 
-    public static bool TryMakePotion(int[] materialCount, ref Potion result)
+    public static bool TryMakePotion(int[] materialCount, out Potion result)
     {
+        result = new Potion();
         if (materialCount.Length != Enum.GetValues(typeof(Potion)).Length) return false;
 
         foreach (var potion in Instance.Potions)
