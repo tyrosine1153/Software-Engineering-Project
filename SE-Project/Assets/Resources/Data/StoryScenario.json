@@ -22,7 +22,7 @@
       },
       null,
       {
-        "CharacterId": 3,
+        "CharacterId": 2,
         "Emotion": 2
       }
     ],
@@ -51,7 +51,7 @@
       },
       null,
       {
-        "CharacterId": 3,
+        "CharacterId": 2,
         "Emotion": 2
       }
     ],
@@ -80,7 +80,7 @@
       },
       null,
       {
-        "CharacterId": 3,
+        "CharacterId": 2,
         "Emotion": 2
       }
     ],
@@ -89,7 +89,7 @@
   {
     "ID": 3,
     "PrevId": 2,
-    "NextId": -1,
+    "NextId": 4,
     "Speaker": "Speaker",
     "Content": "The Quick Brown Fox Jumps Over The Lazy Dog",
     "Effects": [
@@ -109,7 +109,7 @@
       },
       null,
       {
-        "CharacterId": 3,
+        "CharacterId": 2,
         "Emotion": 2
       }
     ],

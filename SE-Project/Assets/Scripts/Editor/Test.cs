@@ -47,7 +47,7 @@ public static class Test
                     new CharacterAct(0, CharacterEmotionType.Idle),
                     new CharacterAct(1, CharacterEmotionType.Happy),
                     null,
-                    new CharacterAct(3, CharacterEmotionType.Sad),
+                    new CharacterAct(2, CharacterEmotionType.Sad),
                 },
                 Order = null
             };
@@ -67,7 +67,7 @@ public static class Test
                 new CharacterAct(0, CharacterEmotionType.Idle),
                 new CharacterAct(1, CharacterEmotionType.Happy),
                 null,
-                new CharacterAct(3, CharacterEmotionType.Sad),
+                new CharacterAct(2, CharacterEmotionType.Sad),
             },
             Order = new[]
             {
@@ -171,7 +171,7 @@ public static class Test
         {
             matchingOrder = order.First(o => o.PotionId == potion.ID);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             matchingOrder = order.FirstOrDefault(o => o.PotionId == -1);
         }
