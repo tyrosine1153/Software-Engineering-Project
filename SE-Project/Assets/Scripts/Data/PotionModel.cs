@@ -1,10 +1,13 @@
-﻿public struct Potion  // json
+﻿using System;
+
+[Serializable]
+public class Potion
 {
-    public int ID;
-    public string Name;
-    public string Description;
-    public Material PotionType;
-    public int[] Material;
+    public int id;
+    public string name;
+    public string description;
+    public Material potionType;
+    public int[] material;
 }
 
 public enum Material

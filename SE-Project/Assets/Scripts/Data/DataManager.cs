@@ -25,7 +25,7 @@ public class DataManager : Singleton<DataManager>
         Characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
         EndingPoints = LoadByJson<EndingPoint>(DataPath, "EndingPoints").ToList();
 
-        StoryScenario = StoryScenario.OrderBy(s => s.ID).ToArray();
+        StoryScenario = StoryScenario.OrderBy(s => s.id).ToArray();
     }
 
     public static bool TryMakePotion(int[] materialCount, out Potion result)
@@ -35,8 +35,8 @@ public class DataManager : Singleton<DataManager>
 
         foreach (var potion in Instance.Potions)
         {
-            if (potion.Material.Length != Enum.GetValues(typeof(Potion)).Length) return false;
-            if (potion.Material.Where((t, i) => t != materialCount[i]).Any()) continue;
+            if (potion.material.Length != Enum.GetValues(typeof(Potion)).Length) return false;
+            if (potion.material.Where((t, i) => t != materialCount[i]).Any()) continue;
 
             result = potion;
             return true;
@@ -56,7 +56,7 @@ public class DataManager : Singleton<DataManager>
         EndingPoints.Add(endingPoint);
         SaveByJson(DataPath, "EndingPoints", EndingPoints);
         
-        PlayerPrefs.SetInt("StoryPoint", endingPoint.NextScenarioID);
+        PlayerPrefs.SetInt("StoryPoint", endingPoint.nextScenarioID);
     }
     
     public int LoadGameStoryPoint()

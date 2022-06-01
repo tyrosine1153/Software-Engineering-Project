@@ -19,25 +19,25 @@ public class Story : MonoBehaviour
     public void ShowStory(StoryScenario currentStoryScenario)
     {
         // Hide Buttons 
-        prevScenarioButton.gameObject.SetActive(currentStoryScenario.PrevId != -1);
-        nextScenarioButton.gameObject.SetActive(currentStoryScenario.NextId != -1);
+        prevScenarioButton.gameObject.SetActive(currentStoryScenario.prevId != -1);
+        nextScenarioButton.gameObject.SetActive(currentStoryScenario.nextId != -1);
 
         // Display Text
-        speakerText.text = currentStoryScenario.Speaker;
-        contentText.text = currentStoryScenario.Content;
-        print($"{currentStoryScenario.PrevId} <- {currentStoryScenario.ID} -> {currentStoryScenario.NextId}");
+        speakerText.text = currentStoryScenario.speaker;
+        contentText.text = currentStoryScenario.content;
+        print($"{currentStoryScenario.prevId} <- {currentStoryScenario.id} -> {currentStoryScenario.nextId}");
         
         // Todo : Add Effects
-        if (currentStoryScenario.Effects[(int)EffectType.None] != 1) { }
+        if (currentStoryScenario.effects[(int)EffectType.None] != 1) { }
         else { }
 
-        foreach (var scenarioCharacter in currentStoryScenario.Characters)
+        foreach (var scenarioCharacter in currentStoryScenario.characters)
         {
             if(scenarioCharacter == null) continue;
             
-            var characterId = scenarioCharacter.CharacterId;
-            var character = DataManager.Instance.Characters.FirstOrDefault(c => c.ID == characterId);
-            if (character.Emotion.All(emotion => emotion != scenarioCharacter.Emotion))
+            var characterId = scenarioCharacter.characterId;
+            var character = DataManager.Instance.Characters.FirstOrDefault(c => c.id == characterId);
+            if (character.emotion.All(emotion => emotion != scenarioCharacter.emotion))
             {
                 Debug.LogError("Emotion not found");
             }

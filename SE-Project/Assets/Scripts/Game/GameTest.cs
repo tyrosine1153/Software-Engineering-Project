@@ -25,19 +25,19 @@ public class GameTest : Singleton<GameTest>
         if(id == -1) Debug.LogError($"Story was not found. invalid id: {id}");
 
         currentStoryId = id;
-        currentStoryScenario = DataManager.Instance.StoryScenario.FirstOrDefault(s => s.ID == currentStoryId);
+        currentStoryScenario = DataManager.Instance.StoryScenario.FirstOrDefault(s => s.id == currentStoryId);
 
-        if (currentStoryScenario.Order != null)
+        if (currentStoryScenario.order != null)
         {
-            currentStoryOptions = currentStoryScenario.Order;
+            currentStoryOptions = currentStoryScenario.order;
             openCraftPage = true;
         }
         else
         {
-            var nextStory = DataManager.Instance.StoryScenario.FirstOrDefault(s => s.ID == currentStoryScenario.NextId);
-            if (nextStory.PrevId == -1)
+            var nextStory = DataManager.Instance.StoryScenario.FirstOrDefault(s => s.id == currentStoryScenario.nextId);
+            if (nextStory.prevId == -1)
             {
-                nextStory.PrevId = currentStoryScenario.ID;
+                nextStory.prevId = currentStoryScenario.id;
             }
         }
 
@@ -46,14 +46,14 @@ public class GameTest : Singleton<GameTest>
     
     public void SetPrevStory()
     {
-        if (currentStoryScenario.PrevId == -1)
+        if (currentStoryScenario.prevId == -1)
         {
             Debug.LogError("Not created button.");  // 생성되지 않은 버튼이 눌릴 경우
             return;
         }
         openCraftPage = false;
 
-        SetStory(currentStoryScenario.PrevId);
+        SetStory(currentStoryScenario.prevId);
     }
     
     public void SetNextStory()
@@ -66,12 +66,12 @@ public class GameTest : Singleton<GameTest>
             return;
         }
         
-        if (currentStoryScenario.NextId == -1)
+        if (currentStoryScenario.nextId == -1)
         {
             // Todo : Story End
             return;
         }
-        SetStory(currentStoryScenario.NextId);
+        SetStory(currentStoryScenario.nextId);
     }
 
     public void GetPotionStory(Potion potion)
@@ -80,23 +80,23 @@ public class GameTest : Singleton<GameTest>
         try
         {
             // First는 맞는 값이 없으면 exception 발생
-            matchingOrder = currentStoryOptions.First(o => o.PotionId == potion.ID);
+            matchingOrder = currentStoryOptions.First(o => o.potionId == potion.id);
         }
         catch (Exception)
         {
             // 근데 정해진 선택지 외의 값이 들어오면 그에 맞는 스크립트가 필요함
-            matchingOrder = currentStoryOptions.FirstOrDefault(o => o.PotionId == -1);
+            matchingOrder = currentStoryOptions.FirstOrDefault(o => o.potionId == -1);
         }
         
         var endingPoint = new EndingPoint
         {
-            ID = currentStoryScenario.ID,
-            NextScenarioID = matchingOrder.NextScenarioID,
-            Result = matchingOrder.Result
+            id = currentStoryScenario.id,
+            nextScenarioID = matchingOrder.nextScenarioID,
+            result = matchingOrder.result
         };
         DataManager.Instance.SaveGameStoryPoint(endingPoint);
 
         craft.gameObject.SetActive(false);
-        SetStory(matchingOrder.NextScenarioID);
+        SetStory(matchingOrder.nextScenarioID);
     }
 }
