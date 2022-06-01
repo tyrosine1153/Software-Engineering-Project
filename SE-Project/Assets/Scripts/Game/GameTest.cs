@@ -25,7 +25,7 @@ public class GameTest : Singleton<GameTest>
         if(id == -1) Debug.LogError($"Story was not found. invalid id: {id}");
 
         currentStoryId = id;
-        currentStoryScenario = DataManager.Instance.StoryScenario.FirstOrDefault(s => s.id == currentStoryId);
+        currentStoryScenario = DataManager.Instance.storyScenario.FirstOrDefault(s => s.id == currentStoryId);
 
         if (currentStoryScenario.order != null)
         {
@@ -34,7 +34,7 @@ public class GameTest : Singleton<GameTest>
         }
         else
         {
-            var nextStory = DataManager.Instance.StoryScenario.FirstOrDefault(s => s.id == currentStoryScenario.nextId);
+            var nextStory = DataManager.Instance.storyScenario.FirstOrDefault(s => s.id == currentStoryScenario.nextId);
             if (nextStory.prevId == -1)
             {
                 nextStory.prevId = currentStoryScenario.id;

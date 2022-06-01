@@ -105,7 +105,7 @@ public static class Test
         var log = new StringBuilder();
         log.AppendLine("Story Read Test\n");
 
-        var currentStory = DataManager.Instance.StoryScenario.FirstOrDefault(s => s.id == id); // 임시 값 (필드)
+        var currentStory = DataManager.Instance.storyScenario.FirstOrDefault(s => s.id == id); // 임시 값 (필드)
 
         log.AppendLine($"{currentStory.speaker} : {currentStory.content}");
 
@@ -142,7 +142,7 @@ public static class Test
         for (int i = 0; i < 4; i++)
         {
             var character =
-                DataManager.Instance.Characters.FirstOrDefault(c => c.id == currentStory.characters[0].characterId);
+                DataManager.Instance.characters.FirstOrDefault(c => c.id == currentStory.characters[0].characterId);
             var emotion = character.emotion.FirstOrDefault(emotion => emotion == currentStory.characters[0].emotion);
             log.AppendLine($"{i} : {character.name}_{emotion.ToString()}");
         }
@@ -151,16 +151,16 @@ public static class Test
         {
             // 대충 order 값 변수에 저장, UI에 표시, 요리 시작
         }
-        else if (DataManager.Instance.StoryScenario[currentStory.nextId].prevId == -1)
+        else if (DataManager.Instance.storyScenario[currentStory.nextId].prevId == -1)
         {
-            DataManager.Instance.StoryScenario[currentStory.nextId].prevId = currentStory.id;
+            DataManager.Instance.storyScenario[currentStory.nextId].prevId = currentStory.id;
         }
     }
 
     // 스토리 분기 로직
     public static void StoryServeTest(Potion potion)
     {
-        var currentStory = DataManager.Instance.StoryScenario[3]; // 임시 값 (필드)
+        var currentStory = DataManager.Instance.storyScenario[3]; // 임시 값 (필드)
         var order = currentStory.order; // 임시 order 값(필드) : read에서 저장했다는 전재
 
         var log = new StringBuilder();

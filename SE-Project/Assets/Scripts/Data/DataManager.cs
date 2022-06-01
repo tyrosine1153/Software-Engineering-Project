@@ -9,10 +9,10 @@ public class DataManager : Singleton<DataManager>
 {
     public static string DataPath;
     
-    public Potion[] Potions;
-    public StoryScenario[] StoryScenario;
-    public Character[] Characters;
-    public List<EndingPoint> EndingPoints;
+    public Potion[] potions;
+    public StoryScenario[] storyScenario;
+    public Character[] characters;
+    public List<EndingPoint> endingPoints;
     
     protected override void Awake()
     {
@@ -20,12 +20,12 @@ public class DataManager : Singleton<DataManager>
 
         DataPath = Path.Combine(Application.dataPath, "Resources/Data");
         
-        Potions = LoadByJson<Potion>(DataPath, "Potions").ToArray();
-        StoryScenario = LoadByJson<StoryScenario>(DataPath, "StoryScenario").ToArray();
-        Characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
-        EndingPoints = LoadByJson<EndingPoint>(DataPath, "EndingPoints").ToList();
+        potions = LoadByJson<Potion>(DataPath, "Potions").ToArray();
+        storyScenario = LoadByJson<StoryScenario>(DataPath, "StoryScenario").ToArray();
+        characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
+        endingPoints = LoadByJson<EndingPoint>(DataPath, "EndingPoints").ToList();
 
-        StoryScenario = StoryScenario.OrderBy(s => s.id).ToArray();
+        storyScenario = storyScenario.OrderBy(s => s.id).ToArray();
     }
 
     public static bool TryMakePotion(int[] materialCount, out Potion result)
@@ -33,7 +33,7 @@ public class DataManager : Singleton<DataManager>
         result = new Potion();
         if (materialCount.Length != Enum.GetValues(typeof(Potion)).Length) return false;
 
-        foreach (var potion in Instance.Potions)
+        foreach (var potion in Instance.potions)
         {
             if (potion.material.Length != Enum.GetValues(typeof(Potion)).Length) return false;
             if (potion.material.Where((t, i) => t != materialCount[i]).Any()) continue;
@@ -53,8 +53,8 @@ public class DataManager : Singleton<DataManager>
 
     public void SaveGameStoryPoint(EndingPoint endingPoint)
     {
-        EndingPoints.Add(endingPoint);
-        SaveByJson(DataPath, "EndingPoints", EndingPoints);
+        endingPoints.Add(endingPoint);
+        SaveByJson(DataPath, "EndingPoints", endingPoints);
         
         PlayerPrefs.SetInt("StoryPoint", endingPoint.nextScenarioID);
     }
@@ -68,20 +68,20 @@ public class DataManager : Singleton<DataManager>
     {
         PlayerPrefs.SetInt("StoryPoint", 0);
         
-        EndingPoints.Clear();
-        SaveByJson(DataPath, "EndingPoints", EndingPoints);
+        endingPoints.Clear();
+        SaveByJson(DataPath, "EndingPoints", endingPoints);
     }
     #endregion
     
     #region File IO
     public static void SaveByJson<T>(string filePath, string fileName, T obj)
     {
-        File.WriteAllText($"{filePath}/{fileName}.json", JsonConvert.SerializeObject(obj, Formatting.Indented));
+        File.WriteAllText($"{filePath}/{fileName}.json", JsonUtility.ToJson(obj, true));
     }
     
     public static IEnumerable<T> LoadByJson<T>(string filePath, string fileName)
     {
-        return JsonConvert.DeserializeObject<IEnumerable<T>>(File.ReadAllText($"{filePath}/{fileName}.json"));
+        return JsonUtility.FromJson<IEnumerable<T>>(File.ReadAllText($"{filePath}/{fileName}.json"));
     }
 
     public static void SaveByCsv<T>(string filePath, string fileName, IEnumerable<T> records)
