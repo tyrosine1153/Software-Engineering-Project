@@ -596,6 +596,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  potions: []
+  storyScenario: []
+  characters: []
+  endingPoints: []
 --- !u!4 &214638977
 Transform:
   m_ObjectHideFlags: 0

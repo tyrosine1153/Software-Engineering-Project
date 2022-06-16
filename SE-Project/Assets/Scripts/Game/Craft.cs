@@ -24,7 +24,7 @@ public class Craft : MonoBehaviour
 
         for (var i = 0; i < materialButtons.Length; i++)
         {
-            var arg = (Material)i;
+            var arg = (Material)(i % 3);
             var plus = i % 2 == 0;
             materialButtons[i].onClick.AddListener(() => AddPotionMaterial(arg, plus));
         }

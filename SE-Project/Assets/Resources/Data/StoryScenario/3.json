@@ -1,0 +1,153 @@
+{
+    "scenarios": [
+        {
+            "id": 0,
+            "prevId": -1,
+            "nextId": 1,
+            "effects": [
+                0,
+                -2,
+                2,
+                -1
+            ],
+            "speaker": "Speaker",
+            "content": "The Quick Brown Fox Jumps Over The Lazy Dog",
+            "characters": [
+                {
+                    "characterId": 0,
+                    "emotion": 0
+                },
+                {
+                    "characterId": 1,
+                    "emotion": 1
+                },
+                {
+                    "characterId": 0,
+                    "emotion": 0
+                },
+                {
+                    "characterId": 2,
+                    "emotion": 2
+                }
+            ],
+            "order": []
+        },
+        {
+            "id": 1,
+            "prevId": 0,
+            "nextId": 2,
+            "effects": [
+                0,
+                -2,
+                2,
+                -1
+            ],
+            "speaker": "Speaker",
+            "content": "The Quick Brown Fox Jumps Over The Lazy Dog",
+            "characters": [
+                {
+                    "characterId": 0,
+                    "emotion": 0
+                },
+                {
+                    "characterId": 1,
+                    "emotion": 1
+                },
+                {
+                    "characterId": 0,
+                    "emotion": 0
+                },
+                {
+                    "characterId": 2,
+                    "emotion": 2
+                }
+            ],
+            "order": []
+        },
+        {
+            "id": 2,
+            "prevId": 1,
+            "nextId": 3,
+            "effects": [
+                0,
+                -2,
+                2,
+                -1
+            ],
+            "speaker": "Speaker",
+            "content": "The Quick Brown Fox Jumps Over The Lazy Dog",
+            "characters": [
+                {
+                    "characterId": 0,
+                    "emotion": 0
+                },
+                {
+                    "characterId": 1,
+                    "emotion": 1
+                },
+                {
+                    "characterId": 0,
+                    "emotion": 0
+                },
+                {
+                    "characterId": 2,
+                    "emotion": 2
+                }
+            ],
+            "order": []
+        },
+        {
+            "id": 3,
+            "prevId": 2,
+            "nextId": 4,
+            "effects": [
+                0,
+                -2,
+                2,
+                -1
+            ],
+            "speaker": "Speaker",
+            "content": "The Quick Brown Fox Jumps Over The Lazy Dog",
+            "characters": [
+                {
+                    "characterId": 0,
+                    "emotion": 0
+                },
+                {
+                    "characterId": 1,
+                    "emotion": 1
+                },
+                {
+                    "characterId": 0,
+                    "emotion": 0
+                },
+                {
+                    "characterId": 2,
+                    "emotion": 2
+                }
+            ],
+            "order": [
+                {
+                    "potionId": 0,
+                    "nextScenarioID": 4,
+                    "result": 0
+                },
+                {
+                    "potionId": 1,
+                    "nextScenarioID": 5,
+                    "result": 1
+                },
+                {
+                    "potionId": 2,
+                    "nextScenarioID": 6,
+                    "result": 2
+                },
+                {
+                    "potionId": -1,
+                    "nextScenarioID": 7,
+                    "result": 3
+                }
+            ]
+        }
+    ]
+}
