@@ -7,34 +7,17 @@ using UnityEngine;
 
 public static class Test
 {
-    public static readonly string DataPath = $"{Application.dataPath}/Resources/Data";
-    public static readonly string SpritePath = $"{Application.dataPath}/Resources/Sprite";
-    public const string SpritePathInResource = "Sprite";
+    private const string AssetDataPath = "Assets/Resources/Data";
 
     [MenuItem("Tools/Create Empty File")]
     public static void CreateEmptyFile()
     {
-        int i;
-
-        var potions = new List<Potion>();
-        for (i = 0; i < 3; i++)
-        {
-            var food = new Potion
-            {
-                id = i,
-                name = "name",
-                description = "Potions to test",
-                material = new[] {i - 1, i, i + 1},
-            };
-            potions.Add(food);
-        }
-
-        DataManager.SaveByJson(DataPath, "Potions", potions);
-
         var scenario = new List<StoryScenario>();
+        int i;
+        StoryScenario storyScenario;
         for (i = 0; i < 3; i++)
         {
-            var storyScenario = new StoryScenario
+            storyScenario = new StoryScenario
             {
                 id = i,
                 prevId = i - 1,
@@ -54,7 +37,7 @@ public static class Test
             scenario.Add(storyScenario);
         }
 
-        var storyScenario_ = new StoryScenario
+        storyScenario = new StoryScenario
         {
             id = i,
             prevId = i - 1,
@@ -77,9 +60,21 @@ public static class Test
                 new OrderOption(-1, 7, 3),
             }
         };
-        scenario.Add(storyScenario_);
-        DataManager.SaveByJson(DataPath, "StoryScenario", scenario);
+        scenario.Add(storyScenario);
 
+        var potions = new List<Potion>();
+        for (i = 0; i < 3; i++)
+        {
+            var food = new Potion
+            {
+                id = i,
+                name = "name",
+                description = "Potions to test",
+                material = new[] {i - 1, i, i + 1},
+            };
+            potions.Add(food);
+        }
+        
         var characters = new List<Character>();
         for (i = 0; i < 3; i++)
         {
@@ -87,16 +82,31 @@ public static class Test
             {
                 id = i,
                 name = "Jeongmin",
-                description = "The Greatest Programmer",
+                description = "The Worst Programmer",
                 emotion = new[] {CharacterEmotionType.Idle, CharacterEmotionType.Happy, CharacterEmotionType.Sad},
             };
             characters.Add(character);
         }
 
-        DataManager.SaveByJson(DataPath, "Characters", characters);
-
         var endingPoints = new List<EndingPoint>();
-        DataManager.SaveByJson(DataPath, "EndingPoints", endingPoints);
+
+        const int dayToTest = 5;
+        AssetDatabase.CreateFolder(AssetDataPath, "StoryScenario");
+        for (int j = 1; j <= dayToTest; j++)
+        {
+            var storyScenarioScriptableObject = ScriptableObject.CreateInstance<StoryScenarioScriptableObject>();
+            storyScenarioScriptableObject.scenarios = scenario.ToArray();
+            AssetDatabase.CreateAsset(storyScenarioScriptableObject, $"{AssetDataPath}/StoryScenario/{j}.asset");
+        }
+
+        var gameDataScriptableObject = ScriptableObject.CreateInstance<GameDataScriptableObject>();
+        gameDataScriptableObject.potions = potions.ToArray();
+        gameDataScriptableObject.characters = characters.ToArray();
+        AssetDatabase.CreateAsset(gameDataScriptableObject, $"{AssetDataPath}/GameData.asset");
+
+        AssetDatabase.Refresh();
+        
+        DataManager.SaveByJson(endingPoints, "endingPoints");
     }
 
     // 스토리 읽기 로직
@@ -196,5 +206,16 @@ public static class Test
             id = 9
         };
         StoryServeTest(potion);
+    }
+
+    [MenuItem("Tools/Convert Story Scenario Asset To Json")]
+    public static void ConvertStoryScenarioAssetToJson()
+    {
+        var storyScenarioArray =  Resources.LoadAll<StoryScenarioScriptableObject>("Data/StoryScenario");
+
+        foreach (var storyScenario in storyScenarioArray)
+        {
+            DataManager.SaveByJson(new FuckingStoryScenarioArray(storyScenario.scenarios), $"{storyScenario.name}", "StoryScenario");
+        }
     }
 }

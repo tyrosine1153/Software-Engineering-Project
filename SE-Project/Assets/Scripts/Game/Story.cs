@@ -36,7 +36,7 @@ public class Story : MonoBehaviour
             if(scenarioCharacter == null) continue;
             
             var characterId = scenarioCharacter.characterId;
-            var character = DataManager.Instance.characters.FirstOrDefault(c => c.id == characterId);
+            var character = DataManager.Instance.characters.First(c => c.id == characterId);
             if (character.emotion.All(emotion => emotion != scenarioCharacter.emotion))
             {
                 Debug.LogError("Emotion not found");

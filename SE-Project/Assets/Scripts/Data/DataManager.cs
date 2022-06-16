@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
-    public static string DataPath;
-    
     public Potion[] potions;
     public StoryScenario[] storyScenario;
     public Character[] characters;
@@ -18,12 +15,12 @@ public class DataManager : Singleton<DataManager>
     {
         base.Awake();
 
-        DataPath = Path.Combine(Application.dataPath, "Resources/Data");
-        
-        potions = LoadByJson<Potion>(DataPath, "Potions").ToArray();
-        storyScenario = LoadByJson<StoryScenario>(DataPath, "StoryScenario").ToArray();
-        characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
-        endingPoints = LoadByJson<EndingPoint>(DataPath, "EndingPoints").ToList();
+        const int currentDay = 3;
+        var gameData = Resources.Load<GameDataScriptableObject>("Data/GameData");
+        potions = gameData.potions;
+        characters = gameData.characters;
+        endingPoints = LoadByJson<List<EndingPoint>>("EndingPoints");
+        storyScenario = LoadByJson<FuckingStoryScenarioArray>(currentDay.ToString(), "StoryScenario").scenarios;
 
         storyScenario = storyScenario.OrderBy(s => s.id).ToArray();
     }
@@ -46,6 +43,12 @@ public class DataManager : Singleton<DataManager>
     }
 
     #region Save/Load
+
+    public void SaveScenario()
+    {
+        SaveByJson(storyScenario, "StoryScenario");
+    }
+    
     public void SaveGameStoryPoint(int scenarioId)
     {
         PlayerPrefs.SetInt("StoryPoint", scenarioId);
@@ -54,7 +57,7 @@ public class DataManager : Singleton<DataManager>
     public void SaveGameStoryPoint(EndingPoint endingPoint)
     {
         endingPoints.Add(endingPoint);
-        SaveByJson(DataPath, "EndingPoints", endingPoints);
+        SaveByJson(endingPoints, "EndingPoints");
         
         PlayerPrefs.SetInt("StoryPoint", endingPoint.nextScenarioID);
     }
@@ -69,19 +72,26 @@ public class DataManager : Singleton<DataManager>
         PlayerPrefs.SetInt("StoryPoint", 0);
         
         endingPoints.Clear();
-        SaveByJson(DataPath, "EndingPoints", endingPoints);
+        SaveByJson(endingPoints, "EndingPoints");
     }
     #endregion
     
     #region File IO
-    public static void SaveByJson<T>(string filePath, string fileName, T obj)
+    public static void SaveByJson<T>(T obj, string fileName, string filePath = null)
     {
+        filePath = filePath == null
+            ? Path.Combine(Application.dataPath, "Resources/Data")
+            : Path.Combine(Application.dataPath, "Resources/Data", filePath);
         File.WriteAllText($"{filePath}/{fileName}.json", JsonUtility.ToJson(obj, true));
     }
-    
-    public static IEnumerable<T> LoadByJson<T>(string filePath, string fileName)
+
+    public static T LoadByJson<T>(string fileName, string filePath = null)
     {
-        return JsonUtility.FromJson<IEnumerable<T>>(File.ReadAllText($"{filePath}/{fileName}.json"));
+        var path = filePath == null ? $"Data/{fileName}" : $"Data/{filePath}/{fileName}";
+        var textAsset = Resources.Load<TextAsset>(path);
+        Debug.Log(textAsset.text);
+
+        return JsonUtility.FromJson<T>(textAsset.text);
     }
 
     public static void SaveByCsv<T>(string filePath, string fileName, IEnumerable<T> records)
@@ -91,7 +101,8 @@ public class DataManager : Singleton<DataManager>
     
     public static IEnumerable<T> LoadByCsv<T>(string filePath, string fileName)
     {
-        return CSVSerializer.Deserialize<T>(File.ReadAllText($"{filePath}/{fileName}.csv"));
+        var textAsset = Resources.Load<TextAsset>($"{filePath}/{fileName}");
+        return CSVSerializer.Deserialize<T>(textAsset.text);
     }
     #endregion
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -25,7 +24,7 @@ public class GameTest : Singleton<GameTest>
         if(id == -1) Debug.LogError($"Story was not found. invalid id: {id}");
 
         currentStoryId = id;
-        currentStoryScenario = DataManager.Instance.storyScenario.FirstOrDefault(s => s.id == currentStoryId);
+        currentStoryScenario = DataManager.Instance.storyScenario.First(s => s.id == currentStoryId);
 
         if (currentStoryScenario.order != null)
         {
@@ -34,7 +33,7 @@ public class GameTest : Singleton<GameTest>
         }
         else
         {
-            var nextStory = DataManager.Instance.storyScenario.FirstOrDefault(s => s.id == currentStoryScenario.nextId);
+            var nextStory = DataManager.Instance.storyScenario.First(s => s.id == currentStoryScenario.nextId);
             if (nextStory.prevId == -1)
             {
                 nextStory.prevId = currentStoryScenario.id;
@@ -76,17 +75,9 @@ public class GameTest : Singleton<GameTest>
 
     public void GetPotionStory(Potion potion)
     {
-        OrderOption matchingOrder;
-        try
-        {
-            // First는 맞는 값이 없으면 exception 발생
-            matchingOrder = currentStoryOptions.First(o => o.potionId == potion.id);
-        }
-        catch (Exception)
-        {
-            // 근데 정해진 선택지 외의 값이 들어오면 그에 맞는 스크립트가 필요함
-            matchingOrder = currentStoryOptions.FirstOrDefault(o => o.potionId == -1);
-        }
+        // First는 맞는 값이 없으면 exception 발생. 근데 정해진 선택지 외의 값이 들어오면 그에 맞는 스크립트가 필요함
+        var matchingOrder = currentStoryOptions.FirstOrDefault(o => o.potionId == potion.id) ??
+                            currentStoryOptions.First(o => o.potionId == -1);
         
         var endingPoint = new EndingPoint
         {
