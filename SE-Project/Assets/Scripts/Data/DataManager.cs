@@ -1,52 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
-    public static string DataPath;
-    
-    public Food[] Foods;
-    public StoryScenario[] StoryScenario;
-    public Character[] Characters;
-    public List<EndingPoint> EndingPoints;
+    public Potion[] potions;
+    public StoryScenario[] storyScenario;
+    public Character[] characters;
+    public List<EndingPoint> endingPoints;
     
     protected override void Awake()
     {
         base.Awake();
 
-        DataPath = Path.Combine(Application.dataPath, "Resources/Data");
-        
-        Foods = LoadByCsv<Food>(DataPath, "Foods").ToArray();
-        StoryScenario = LoadByJson<StoryScenario>(DataPath, "StoryScenario").ToArray();
-        Characters = LoadByJson<Character>(DataPath, "Characters").ToArray();
-        EndingPoints = LoadByJson<EndingPoint>(DataPath, "EndingPoints").ToList();
+        const int currentDay = 3;
+        var gameData = Resources.Load<GameDataScriptableObject>("Data/GameData");
+        potions = gameData.potions;
+        characters = gameData.characters;
+        endingPoints = LoadByJson<List<EndingPoint>>("EndingPoints");
+        storyScenario = LoadByJson<FuckingStoryScenarioArray>(currentDay.ToString(), "StoryScenario").scenarios;
 
-        StoryScenario = StoryScenario.OrderBy(s => s.ID).ToArray();
+        storyScenario = storyScenario.OrderBy(s => s.id).ToArray();
     }
 
-    public static bool TryMakeFood(int[] materialCount, ref Food result)
+    public static bool TryMakePotion(int[] materialCount, out Potion result)
     {
-        var material = 0;
-        for (int i = 0; i < materialCount.Length; i++)
+        result = new Potion();
+        if (materialCount.Length != Enum.GetValues(typeof(Potion)).Length) return false;
+
+        foreach (var potion in Instance.potions)
         {
-            material += materialCount[i] * (10 ^ i);
+            if (potion.material.Length != Enum.GetValues(typeof(Potion)).Length) return false;
+            if (potion.material.Where((t, i) => t != materialCount[i]).Any()) continue;
+
+            result = potion;
+            return true;
         }
 
-        foreach (var food in Instance.Foods)
-        {
-            if (food.Material == material)
-            {
-                result = food;
-                return true;
-            }
-        }
         return false;
     }
-    
+
     #region Save/Load
+
+    public void SaveScenario()
+    {
+        SaveByJson(storyScenario, "StoryScenario");
+    }
+    
     public void SaveGameStoryPoint(int scenarioId)
     {
         PlayerPrefs.SetInt("StoryPoint", scenarioId);
@@ -54,10 +56,10 @@ public class DataManager : Singleton<DataManager>
 
     public void SaveGameStoryPoint(EndingPoint endingPoint)
     {
-        EndingPoints.Add(endingPoint);
-        SaveByJson(DataPath, "EndingPoints", EndingPoints);
+        endingPoints.Add(endingPoint);
+        SaveByJson(endingPoints, "EndingPoints");
         
-        PlayerPrefs.SetInt("StoryPoint", endingPoint.NextScenarioID);
+        PlayerPrefs.SetInt("StoryPoint", endingPoint.nextScenarioID);
     }
     
     public int LoadGameStoryPoint()
@@ -69,20 +71,27 @@ public class DataManager : Singleton<DataManager>
     {
         PlayerPrefs.SetInt("StoryPoint", 0);
         
-        EndingPoints.Clear();
-        SaveByJson(DataPath, "EndingPoints", EndingPoints);
+        endingPoints.Clear();
+        SaveByJson(endingPoints, "EndingPoints");
     }
     #endregion
     
     #region File IO
-    public static void SaveByJson<T>(string filePath, string fileName, T obj)
+    public static void SaveByJson<T>(T obj, string fileName, string filePath = null)
     {
-        File.WriteAllText($"{filePath}/{fileName}.json", JsonConvert.SerializeObject(obj, Formatting.Indented));
+        filePath = filePath == null
+            ? Path.Combine(Application.dataPath, "Resources/Data")
+            : Path.Combine(Application.dataPath, "Resources/Data", filePath);
+        File.WriteAllText($"{filePath}/{fileName}.json", JsonUtility.ToJson(obj, true));
     }
-    
-    public static IEnumerable<T> LoadByJson<T>(string filePath, string fileName)
+
+    public static T LoadByJson<T>(string fileName, string filePath = null)
     {
-        return JsonConvert.DeserializeObject<IEnumerable<T>>(File.ReadAllText($"{filePath}/{fileName}.json"));
+        var path = filePath == null ? $"Data/{fileName}" : $"Data/{filePath}/{fileName}";
+        var textAsset = Resources.Load<TextAsset>(path);
+        Debug.Log(textAsset.text);
+
+        return JsonUtility.FromJson<T>(textAsset.text);
     }
 
     public static void SaveByCsv<T>(string filePath, string fileName, IEnumerable<T> records)
@@ -92,7 +101,8 @@ public class DataManager : Singleton<DataManager>
     
     public static IEnumerable<T> LoadByCsv<T>(string filePath, string fileName)
     {
-        return CSVSerializer.Deserialize<T>(File.ReadAllText($"{filePath}/{fileName}.csv"));
+        var textAsset = Resources.Load<TextAsset>($"{filePath}/{fileName}");
+        return CSVSerializer.Deserialize<T>(textAsset.text);
     }
     #endregion
 }

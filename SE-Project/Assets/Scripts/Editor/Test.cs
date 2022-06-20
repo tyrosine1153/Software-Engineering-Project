@@ -7,71 +7,52 @@ using UnityEngine;
 
 public static class Test
 {
-    public static readonly string DataPath = $"{Application.dataPath}/Resources/Data";
-    public static readonly string SpritePath = $"{Application.dataPath}/Resources/Sprite";
-    public const string SpritePathInResource = "Sprite";
+    private const string AssetDataPath = "Assets/Resources/Data";
 
     [MenuItem("Tools/Create Empty File")]
     public static void CreateEmptyFile()
     {
-        int i;
-
-        var foods = new List<Food>();
-        for (i = 0; i < 3; i++)
-        {
-            var food = new Food
-            {
-                ID = i,
-                Name = "name",
-                Description = "Food to test",
-                Image = $"{SpritePathInResource}/{i}",
-                Material = 1001034,
-            };
-            foods.Add(food);
-        }
-
-        DataManager.SaveByJson(DataPath, "Foods", foods);
-        DataManager.SaveByCsv(DataPath, "Foods", foods);
-
         var scenario = new List<StoryScenario>();
+        int i;
+        StoryScenario storyScenario;
         for (i = 0; i < 3; i++)
         {
-            var storyScenario = new StoryScenario
+            storyScenario = new StoryScenario
             {
-                ID = i,
-                PrevId = i - 1,
-                NextId = i + 1,
-                Speaker = "Speaker",
-                Content = "The Quick Brown Fox Jumps Over The Lazy Dog",
-                Effects = new[] {0, -2, 2, -1},
-                Characters = new[]
+                id = i,
+                prevId = i - 1,
+                nextId = i + 1,
+                speaker = "Speaker",
+                content = "The Quick Brown Fox Jumps Over The Lazy Dog",
+                effects = new[] {0, -2, 2, -1},
+                characters = new[]
                 {
                     new CharacterAct(0, CharacterEmotionType.Idle),
                     new CharacterAct(1, CharacterEmotionType.Happy),
                     null,
-                    new CharacterAct(3, CharacterEmotionType.Sad),
+                    new CharacterAct(2, CharacterEmotionType.Sad),
                 },
-                Order = null
+                order = null
             };
             scenario.Add(storyScenario);
         }
 
-        var storyScenario_ = new StoryScenario
+        storyScenario = new StoryScenario
         {
-            ID = i,
-            PrevId = i - 1,
-            NextId = i + 1,
-            Speaker = "Speaker",
-            Content = "The Quick Brown Fox Jumps Over The Lazy Dog",
-            Effects = new[] {0, -2, 2, -1},
-            Characters = new[]
+            id = i,
+            prevId = i - 1,
+            nextId = i + 1,
+            speaker = "Speaker",
+            content = "The Quick Brown Fox Jumps Over The Lazy Dog",
+            effects = new[] {0, -2, 2, -1},
+            characters = new[]
             {
                 new CharacterAct(0, CharacterEmotionType.Idle),
                 new CharacterAct(1, CharacterEmotionType.Happy),
                 null,
-                new CharacterAct(3, CharacterEmotionType.Sad),
+                new CharacterAct(2, CharacterEmotionType.Sad),
             },
-            Order = new[]
+            order = new[]
             {
                 new OrderOption(0, 4, 0),
                 new OrderOption(1, 5, 1),
@@ -79,26 +60,53 @@ public static class Test
                 new OrderOption(-1, 7, 3),
             }
         };
-        scenario.Add(storyScenario_);
-        DataManager.SaveByJson(DataPath, "StoryScenario", scenario);
+        scenario.Add(storyScenario);
 
+        var potions = new List<Potion>();
+        for (i = 0; i < 3; i++)
+        {
+            var food = new Potion
+            {
+                id = i,
+                name = "name",
+                description = "Potions to test",
+                material = new[] {i - 1, i, i + 1},
+            };
+            potions.Add(food);
+        }
+        
         var characters = new List<Character>();
         for (i = 0; i < 3; i++)
         {
             var character = new Character
             {
-                ID = i,
-                Name = "Jeongmin",
-                Description = "The Greatest Programmer",
-                Emotion = new[] {CharacterEmotionType.Idle, CharacterEmotionType.Happy, CharacterEmotionType.Sad},
+                id = i,
+                name = "Jeongmin",
+                description = "The Worst Programmer",
+                emotion = new[] {CharacterEmotionType.Idle, CharacterEmotionType.Happy, CharacterEmotionType.Sad},
             };
             characters.Add(character);
         }
 
-        DataManager.SaveByJson(DataPath, "Characters", characters);
-
         var endingPoints = new List<EndingPoint>();
-        DataManager.SaveByJson(DataPath, "EndingPoints", endingPoints);
+
+        const int dayToTest = 5;
+        AssetDatabase.CreateFolder(AssetDataPath, "StoryScenario");
+        for (int j = 1; j <= dayToTest; j++)
+        {
+            var storyScenarioScriptableObject = ScriptableObject.CreateInstance<StoryScenarioScriptableObject>();
+            storyScenarioScriptableObject.scenarios = scenario.ToArray();
+            AssetDatabase.CreateAsset(storyScenarioScriptableObject, $"{AssetDataPath}/StoryScenario/{j}.asset");
+        }
+
+        var gameDataScriptableObject = ScriptableObject.CreateInstance<GameDataScriptableObject>();
+        gameDataScriptableObject.potions = potions.ToArray();
+        gameDataScriptableObject.characters = characters.ToArray();
+        AssetDatabase.CreateAsset(gameDataScriptableObject, $"{AssetDataPath}/GameData.asset");
+
+        AssetDatabase.Refresh();
+        
+        DataManager.SaveByJson(endingPoints, "endingPoints");
     }
 
     // 스토리 읽기 로직
@@ -107,32 +115,32 @@ public static class Test
         var log = new StringBuilder();
         log.AppendLine("Story Read Test\n");
 
-        var currentStory = DataManager.Instance.StoryScenario.FirstOrDefault(s => s.ID == id); // 임시 값 (필드)
+        var currentStory = DataManager.Instance.storyScenario.FirstOrDefault(s => s.id == id); // 임시 값 (필드)
 
-        log.AppendLine($"{currentStory.Speaker} : {currentStory.Content}");
+        log.AppendLine($"{currentStory.speaker} : {currentStory.content}");
 
         log.AppendLine("[Effect]");
-        if (currentStory.Effects[(int) EffectType.None] != 1)
+        if (currentStory.effects[(int) EffectType.None] != 1)
         {
-            if (currentStory.Effects[(int) EffectType.Dark] != -1)
+            if (currentStory.effects[(int) EffectType.Dark] != -1)
             {
                 // currentStory.Effects[(int) EffectType.Dark]
                 // -3 : All, -2 : Others, -1 : None, 0~n : Position
-                log.AppendLine($"Dark : {currentStory.Effects[(int) EffectType.Dark]}");
+                log.AppendLine($"Dark : {currentStory.effects[(int) EffectType.Dark]}");
             }
 
-            if (currentStory.Effects[(int) EffectType.Zoom] != -1)
+            if (currentStory.effects[(int) EffectType.Zoom] != -1)
             {
                 // currentStory.Effects[(int) EffectType.Zoom]
                 // -1 : None, 0~n : Position
-                log.AppendLine($"Zoom : {currentStory.Effects[(int) EffectType.Zoom]}");
+                log.AppendLine($"Zoom : {currentStory.effects[(int) EffectType.Zoom]}");
             }
 
-            if (currentStory.Effects[(int) EffectType.Illustration] != -1)
+            if (currentStory.effects[(int) EffectType.Illustration] != -1)
             {
                 // currentStory.Effects[(int) EffectType.Illustration]
                 // -1 : None, 0~n : illustration id
-                log.AppendLine($"Illustration : {currentStory.Effects[(int) EffectType.Illustration]}");
+                log.AppendLine($"Illustration : {currentStory.effects[(int) EffectType.Illustration]}");
             }
         }
         else
@@ -144,60 +152,70 @@ public static class Test
         for (int i = 0; i < 4; i++)
         {
             var character =
-                DataManager.Instance.Characters.FirstOrDefault(c => c.ID == currentStory.Characters[0].CharacterId);
-            var emotion = character.Emotion.FirstOrDefault(emotion => emotion == currentStory.Characters[0].Emotion);
-            log.AppendLine($"{i} : {character.Name}_{emotion.ToString()}");
+                DataManager.Instance.characters.FirstOrDefault(c => c.id == currentStory.characters[0].characterId);
+            var emotion = character.emotion.FirstOrDefault(emotion => emotion == currentStory.characters[0].emotion);
+            log.AppendLine($"{i} : {character.name}_{emotion.ToString()}");
         }
 
-        if (currentStory.Order != null)
+        if (currentStory.order != null)
         {
             // 대충 order 값 변수에 저장, UI에 표시, 요리 시작
         }
-        else if (DataManager.Instance.StoryScenario[currentStory.NextId].PrevId == -1)
+        else if (DataManager.Instance.storyScenario[currentStory.nextId].prevId == -1)
         {
-            DataManager.Instance.StoryScenario[currentStory.NextId].PrevId = currentStory.ID;
+            DataManager.Instance.storyScenario[currentStory.nextId].prevId = currentStory.id;
         }
     }
 
     // 스토리 분기 로직
-    public static void StoryServeTest(Food food)
+    public static void StoryServeTest(Potion potion)
     {
-        var currentStory = DataManager.Instance.StoryScenario[3]; // 임시 값 (필드)
-        var order = currentStory.Order; // 임시 order 값(필드) : read에서 저장했다는 전재
+        var currentStory = DataManager.Instance.storyScenario[3]; // 임시 값 (필드)
+        var order = currentStory.order; // 임시 order 값(필드) : read에서 저장했다는 전재
 
         var log = new StringBuilder();
-        log.AppendLine($"Food id : {food.ID}");
+        log.AppendLine($"Potion id : {potion.id}");
         
         OrderOption matchingOrder;
         try
         {
-            matchingOrder = order.First(o => o.FoodID == food.ID);
+            matchingOrder = order.First(o => o.potionId == potion.id);
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            matchingOrder = order.FirstOrDefault(o => o.FoodID == -1);
+            matchingOrder = order.FirstOrDefault(o => o.potionId == -1);
         }
-        log.AppendLine($"Serve Result : {matchingOrder.FoodID} {matchingOrder.NextScenarioID} {matchingOrder.Result}");
+        log.AppendLine($"Serve Result : {matchingOrder.potionId} {matchingOrder.nextScenarioID} {matchingOrder.result}");
 
         var endingPoint = new EndingPoint
         {
-            ID = currentStory.ID,
-            NextScenarioID = matchingOrder.NextScenarioID,
-            Result = matchingOrder.Result
+            id = currentStory.id,
+            nextScenarioID = matchingOrder.nextScenarioID,
+            result = matchingOrder.result
         };
 
         DataManager.Instance.SaveGameStoryPoint(endingPoint);
-        log.AppendLine($"Save EndingPoint : {endingPoint.ID} {endingPoint.NextScenarioID} {endingPoint.Result}");
-        order = null;
+        log.AppendLine($"Save EndingPoint : {endingPoint.id} {endingPoint.nextScenarioID} {endingPoint.result}");
     }
 
     [MenuItem("Tools/Save Game Story Point")]
     public static void StoryServeTest()
     {
-        var food = new Food
+        var potion = new Potion
         {
-            ID = 9
+            id = 9
         };
-        StoryServeTest(food);
+        StoryServeTest(potion);
+    }
+
+    [MenuItem("Tools/Convert Story Scenario Asset To Json")]
+    public static void ConvertStoryScenarioAssetToJson()
+    {
+        var storyScenarioArray =  Resources.LoadAll<StoryScenarioScriptableObject>("Data/StoryScenario");
+
+        foreach (var storyScenario in storyScenarioArray)
+        {
+            DataManager.SaveByJson(new FuckingStoryScenarioArray(storyScenario.scenarios), $"{storyScenario.name}", "StoryScenario");
+        }
     }
 }
