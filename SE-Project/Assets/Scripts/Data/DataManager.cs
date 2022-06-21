@@ -28,11 +28,11 @@ public class DataManager : Singleton<DataManager>
     public static bool TryMakePotion(int[] materialCount, out Potion result)
     {
         result = new Potion();
-        if (materialCount.Length != Enum.GetValues(typeof(Potion)).Length) return false;
+        if (materialCount.Length != Enum.GetValues(typeof(Material)).Length) return false;
 
         foreach (var potion in Instance.potions)
         {
-            if (potion.material.Length != Enum.GetValues(typeof(Potion)).Length) return false;
+            if (potion.material.Length != Enum.GetValues(typeof(Material)).Length) return false;
             if (potion.material.Where((t, i) => t != materialCount[i]).Any()) continue;
 
             result = potion;

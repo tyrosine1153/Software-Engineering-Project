@@ -22,9 +22,10 @@ public class Craft : MonoBehaviour
         resetButton.onClick.AddListener(ResetPotionMaterial);
         submitButton.onClick.AddListener(MakePotion);
 
+        var materialCount = Enum.GetValues(typeof(Material)).Length;
         for (var i = 0; i < materialButtons.Length; i++)
         {
-            var arg = (Material)(i % 3);
+            var arg = (Material)(i % materialCount);
             var plus = i % 2 == 0;
             materialButtons[i].onClick.AddListener(() => AddPotionMaterial(arg, plus));
         }

@@ -26,7 +26,7 @@ public class GameTest : Singleton<GameTest>
         currentStoryId = id;
         currentStoryScenario = DataManager.Instance.storyScenario.First(s => s.id == currentStoryId);
 
-        if (currentStoryScenario.order != null)
+        if (currentStoryScenario.order.Length > 0)
         {
             currentStoryOptions = currentStoryScenario.order;
             openCraftPage = true;
