@@ -49,7 +49,7 @@ public class Craft : MonoBehaviour
         if (TotalLimit <= totalCount) return; // 전체 조합 물약 개수 제한
 
         var index = (int)potionMaterial;
-        if (MaterialLimit <= Mathf.Abs(counts[index] + (plus ? 1 : -1))) return; // 물약 종류별 제한
+        if (MaterialLimit < Mathf.Abs(counts[index] + (plus ? 1 : -1))) return; // 물약 종류별 제한
 
         totalCount++;
         if (plus)
