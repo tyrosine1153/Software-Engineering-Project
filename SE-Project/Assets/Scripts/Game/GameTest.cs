@@ -5,6 +5,7 @@ public class GameTest : Singleton<GameTest>
 {
     [SerializeField] private Story story;
     [SerializeField] private Craft craft;
+    [SerializeField] private CraftResult craftResult;
     
     private int currentStoryId;
     private StoryScenario currentStoryScenario;
@@ -15,6 +16,7 @@ public class GameTest : Singleton<GameTest>
     {
         story.gameObject.SetActive(true);
         craft.gameObject.SetActive(false);
+        craftResult.gameObject.SetActive(false);
         
         SetStory(0);
     }
@@ -25,10 +27,10 @@ public class GameTest : Singleton<GameTest>
 
         currentStoryId = id;
         currentStoryScenario = DataManager.Instance.storyScenario.First(s => s.id == currentStoryId);
+        currentStoryOptions = currentStoryScenario.order;
 
         if (currentStoryScenario.order.Length > 0)
         {
-            currentStoryOptions = currentStoryScenario.order;
             openCraftPage = true;
         }
         else
@@ -73,8 +75,24 @@ public class GameTest : Singleton<GameTest>
         SetStory(currentStoryScenario.nextId);
     }
 
+    public void RetryCraft()
+    {
+        craft.gameObject.SetActive(true);
+    }
+
+    public void GetPotionResult(int[] materialCount)
+    {
+        var success = DataManager.TryMakePotion(materialCount, out var potion);
+        
+        // Todo : 포션 레시피 해금 여부 결정, 포션 레시피 힌트
+        craftResult.gameObject.SetActive(true);
+        craftResult.ShowResult(success, potion);
+    }
+
     public void GetPotionStory(Potion potion)
     {
+        craftResult.gameObject.SetActive(false);
+        
         // First는 맞는 값이 없으면 exception 발생. 근데 정해진 선택지 외의 값이 들어오면 그에 맞는 스크립트가 필요함
         var matchingOrder = currentStoryOptions.FirstOrDefault(o => o.potionId == potion.id) ??
                             currentStoryOptions.First(o => o.potionId == -1);

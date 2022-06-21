@@ -49,8 +49,7 @@ public class Craft : MonoBehaviour
         if (TotalLimit <= totalCount) return; // 전체 조합 물약 개수 제한
 
         var index = (int)potionMaterial;
-        if (MaterialLimit <= counts[index]) return; // 물약 종류별 제한
-        if (0 >= counts[index]) return;
+        if (MaterialLimit <= Mathf.Abs(counts[index] + (plus ? 1 : -1))) return; // 물약 종류별 제한
 
         totalCount++;
         if (plus)
@@ -69,10 +68,11 @@ public class Craft : MonoBehaviour
         var b = counts[(int)Material.B];
 
         var color = new Color(
-            Math.Abs(r) * ColorRatio,
-            Math.Abs(g) * ColorRatio,
-            Math.Abs(b) * ColorRatio
+            1 - Math.Abs(r) * ColorRatio,
+            1 - Math.Abs(g) * ColorRatio,
+            1 - Math.Abs(b) * ColorRatio
         );
+        Debug.Log($"{r} {g} {b} {color}");
         potionImage.color = color;
         
         // rgb값이 음수일 경우 각 이펙트 출력
@@ -91,14 +91,7 @@ public class Craft : MonoBehaviour
         var materialCount = new[] { counts[(int)Material.R], counts[(int)Material.G], counts[(int)Material.B] };
 
         ResetPotionMaterial();
-        if (!DataManager.TryMakePotion(materialCount, out var potion))
-        {
-            // 없는 조합
-            print("Food Not Found");
-            return;
-        }
-
-        // story.GetPotionStory(potion);
-        // Todo : 포션 레시피 해금 여부 결정, 제출 컨펌
+        
+        GameTest.Instance.GetPotionResult(materialCount);
     }
 }
