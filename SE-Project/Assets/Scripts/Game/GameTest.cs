@@ -1,12 +1,14 @@
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class GameTest : Singleton<GameTest>
 {
+    [SerializeField] public SpriteRenderer[] actors;
     [SerializeField] private Story story;
     [SerializeField] private Craft craft;
     [SerializeField] private CraftResult craftResult;
-    
     private int currentStoryId;
     private StoryScenario currentStoryScenario;
     private OrderOption[] currentStoryOptions;
@@ -17,7 +19,7 @@ public class GameTest : Singleton<GameTest>
         story.gameObject.SetActive(true);
         craft.gameObject.SetActive(false);
         craftResult.gameObject.SetActive(false);
-        
+   
         SetStory(0);
     }
 
@@ -77,6 +79,7 @@ public class GameTest : Singleton<GameTest>
 
     public void RetryCraft()
     {
+        craftResult.gameObject.SetActive(false);
         craft.gameObject.SetActive(true);
     }
 

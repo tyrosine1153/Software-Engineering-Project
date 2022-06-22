@@ -15,8 +15,9 @@ public class CraftResult : MonoBehaviour
     {
         retryButton.onClick.AddListener(() =>
         {
-            
+            GameTest.Instance.RetryCraft();
         });
+        
         submitButton.onClick.AddListener(() =>
         {
             if(_potion == null) return;
