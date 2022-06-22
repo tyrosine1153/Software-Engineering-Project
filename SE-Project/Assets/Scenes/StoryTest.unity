@@ -169,9 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bf768ee5c59a54bac5ba35d2a0bb54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
   mainVirtualCamera: {fileID: 609537500}
-  followObject: {fileID: 144850227}
+  followObject: {fileID: 144850228}
   zoomStartActorIndex: 0
   zoomEndActorIndex: 0
 --- !u!1 &66490054

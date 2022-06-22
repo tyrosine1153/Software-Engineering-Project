@@ -1,25 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(CameraControl))]
 public class CameraTest : Editor
 {
+    private CameraControl cameraControl;
+
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        if (GUILayout.Button("Camera Reset"))
+        cameraControl ??= target as CameraControl;
+        if (cameraControl == null) return;
+
+        if (GUILayout.Button("Reset Camera"))
         {
-            CameraControl.Instance.CameraReset();
+            cameraControl.ResetCamera();
         }
-        
-        if (GUILayout.Button("Camera Zoom in"))
+
+        if (GUILayout.Button("Zoom Camera"))
         {
-            CameraControl.Instance.CameraZoomInOut(
-                CameraControl.Instance.zoomStartActorIndex,
-                CameraControl.Instance.zoomEndActorIndex
+            cameraControl.ZoomCamera(
+                cameraControl.zoomStartActorIndex,
+                cameraControl.zoomEndActorIndex
             );
         }
     }
