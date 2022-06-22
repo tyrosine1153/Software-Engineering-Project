@@ -86,13 +86,13 @@ MonoBehaviour:
   characters:
   - id: 0
     name: "\uC190\uB140"
-    description: The Worst Programmer
+    description: "\uC8FC\uC778\uACF5"
     emotion: 000000000100000002000000
   - id: 1
-    name: Jeongmin
-    description: The Worst Programmer
+    name: "\uD560\uBA38\uB2C8"
+    description: "\uD29C\uD1A0\uB9AC\uC5BC"
     emotion: 000000000100000002000000
   - id: 2
-    name: Jeongmin
-    description: The Worst Programmer
+    name: "\uC5EC\uC790\uC544\uC774"
+    description: "1\uC77C\uCC28 - 1"
     emotion: 000000000100000002000000
