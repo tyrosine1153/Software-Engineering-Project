@@ -14,23 +14,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potions:
   - id: 0
-    name: name
-    description: Potions to test
+    name: "\uC0C1\uCC98 \uD68C\uBCF5\uC758 \uBB3C\uC57D"
+    description: 
     potionType: 0
-    material: ffffffff0000000001000000
+    material: 030000000200000001000000
   - id: 1
-    name: name
-    description: Potions to test
+    name: "\uC9C8\uBCD1 \uC644\uD654\uC758 \uBB3C\uC57D"
+    description: 
     potionType: 0
-    material: 000000000100000002000000
+    material: 050000000100000000000000
   - id: 2
-    name: name
-    description: Potions to test
+    name: "\uB0B4\uAD6C \uAC15\uD654\uC758 \uBB3C\uC57D"
+    description: 
     potionType: 0
+    material: 040000000100000001000000
+  - id: 3
+    name: "\uC0C1\uCC98 \uC7AC\uC0DD\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 0
+    material: 040000000200000000000000
+  - id: 4
+    name: "\uD65C\uB825 \uC99D\uC9C4\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 1
+    material: 010000000400000001000000
+  - id: 5
+    name: "\uC18D\uB3C4 \uAC15\uD654\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 1
+    material: 010000000400000002000000
+  - id: 6
+    name: "\uADFC\uB825 \uAC15\uD654\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 1
+    material: 020000000400000000000000
+  - id: 7
+    name: "\uC7AC\uC8FC \uAC15\uD654\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 1
+    material: 000000000400000002000000
+  - id: 8
+    name: "\uC9D1\uC911 \uAC15\uD654\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 2
+    material: 020000000100000003000000
+  - id: 9
+    name: "\uC758\uC9C0 \uAC15\uD654\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 2
     material: 010000000200000003000000
+  - id: 10
+    name: "\uC5F0\uC0B0 \uAC15\uD654\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 2
+    material: 010000000100000004000000
+  - id: 11
+    name: "\uD0C8\uB825\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 1
+    material: 00000000feffffffffffffff
+  - id: 12
+    name: "\uB9C8\uCDE8\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 2
+    material: 00000000fffffffffeffffff
+  - id: 0
+    name: "\uC1E0\uC57D\uC758 \uBB3C\uC57D"
+    description: 
+    potionType: 0
+    material: feffffffffffffff00000000
   characters:
   - id: 0
-    name: Jeongmin
+    name: "\uC190\uB140"
     description: The Worst Programmer
     emotion: 000000000100000002000000
   - id: 1
