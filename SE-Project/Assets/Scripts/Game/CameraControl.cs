@@ -17,6 +17,8 @@ public class CameraControl : MonoBehaviour
     public int zoomEndActorIndex;
     private void Start()
     {
+        print("Frame Lock : 120 fps");
+        Application.targetFrameRate = 120;
         ResetCamera();
     }
 
@@ -41,17 +43,15 @@ public class CameraControl : MonoBehaviour
         StartCoroutine(CoSetCameraSize(CameraSize(startPosition, endPosition), time));
     }
 
-    private static readonly WaitForSeconds WaitFrameSecond = new WaitForSeconds(0.02f);
-
     private IEnumerator CoSetCameraSize(float endSize, float time)
     {
         var currentSize = mainVirtualCamera.m_Lens.OrthographicSize;
         
         while (Mathf.Abs(currentSize - endSize) > 0.1f)
         {
-            currentSize = Mathf.Lerp(currentSize, endSize, 0.05f);
+            currentSize = Mathf.Lerp(currentSize, endSize, Time.deltaTime);
             mainVirtualCamera.m_Lens.OrthographicSize = currentSize;
-            yield return WaitFrameSecond;
+            yield return null;
         }
         mainVirtualCamera.m_Lens.OrthographicSize = endSize;
     }
