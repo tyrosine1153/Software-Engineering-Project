@@ -92,6 +92,6 @@ public class Craft : MonoBehaviour
 
         ResetPotionMaterial();
         
-        GameTest.Instance.GetPotionResult(materialCount);
+        GameCanvas.Instance.GetPotionResult(materialCount);
     }
 }

@@ -15,14 +15,14 @@ public class CraftResult : MonoBehaviour
     {
         retryButton.onClick.AddListener(() =>
         {
-            GameTest.Instance.RetryCraft();
+            GameCanvas.Instance.RetryCraft();
         });
         
         submitButton.onClick.AddListener(() =>
         {
             if(_potion == null) return;
             
-            GameTest.Instance.GetPotionStory(_potion);
+            GameCanvas.Instance.GetPotionStory(_potion);
             _potion = null;
         });
     }

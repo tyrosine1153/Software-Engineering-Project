@@ -1572,6 +1572,7 @@ GameObject:
   - component: {fileID: 499160054}
   - component: {fileID: 499160053}
   - component: {fileID: 499160052}
+  - component: {fileID: 499160056}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1662,6 +1663,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &499160056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499160051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9861758a03cc414bb0558e74dfae0560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
+  actors:
+  - {fileID: 535904457}
+  - {fileID: 1779858280}
+  - {fileID: 1683283051}
+  - {fileID: 1298012727}
+  story: {fileID: 1527449072}
+  craft: {fileID: 1297750248}
+  craftResult: {fileID: 1910521903}
 --- !u!1 &525137753
 GameObject:
   m_ObjectHideFlags: 0
@@ -4778,58 +4800,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029898134}
   m_CullTransparentMesh: 1
---- !u!1 &2082699346
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2082699348}
-  - component: {fileID: 2082699347}
-  m_Layer: 0
-  m_Name: Game Test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2082699347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2082699346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9861758a03cc414bb0558e74dfae0560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
-  actors:
-  - {fileID: 535904457}
-  - {fileID: 1779858280}
-  - {fileID: 1683283051}
-  - {fileID: 1298012727}
-  story: {fileID: 1527449072}
-  craft: {fileID: 1297750248}
-  craftResult: {fileID: 1910521903}
---- !u!4 &2082699348
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2082699346}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3915328035894719490
 PrefabInstance:
   m_ObjectHideFlags: 0

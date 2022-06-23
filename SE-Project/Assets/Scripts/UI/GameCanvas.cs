@@ -1,17 +1,14 @@
+using System;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class GameTest : Singleton<GameTest>
+public class GameCanvas : Singleton<GameCanvas>
 {
     [SerializeField] public SpriteRenderer[] actors;
     [SerializeField] private Story story;
     [SerializeField] private Craft craft;
     [SerializeField] private CraftResult craftResult;
-    private int currentStoryId;
     private StoryScenario currentStoryScenario;
-    private OrderOption[] currentStoryOptions;
     private bool openCraftPage;
 
     private void Start()
@@ -27,9 +24,7 @@ public class GameTest : Singleton<GameTest>
     {
         if(id == -1) Debug.LogError($"Story was not found. invalid id: {id}");
 
-        currentStoryId = id;
-        currentStoryScenario = DataManager.Instance.storyScenario.First(s => s.id == currentStoryId);
-        currentStoryOptions = currentStoryScenario.order;
+        currentStoryScenario = DataManager.Instance.storyScenario.First(s => s.id == id);
 
         if (currentStoryScenario.order.Length > 0)
         {
@@ -85,7 +80,7 @@ public class GameTest : Singleton<GameTest>
 
     public void GetPotionResult(int[] materialCount)
     {
-        var success = DataManager.TryMakePotion(materialCount, out var potion);
+        var success = TryMakePotion(materialCount, out var potion);
         
         // Todo : 포션 레시피 해금 여부 결정, 포션 레시피 힌트
         craftResult.gameObject.SetActive(true);
@@ -97,18 +92,33 @@ public class GameTest : Singleton<GameTest>
         craftResult.gameObject.SetActive(false);
         
         // First는 맞는 값이 없으면 exception 발생. 근데 정해진 선택지 외의 값이 들어오면 그에 맞는 스크립트가 필요함
-        var matchingOrder = currentStoryOptions.FirstOrDefault(o => o.potionId == potion.id) ??
-                            currentStoryOptions.First(o => o.potionId == -1);
+        var matchingOrder = currentStoryScenario.order.FirstOrDefault(o => o.potionId == potion.id) ??
+                            currentStoryScenario.order.First(o => o.potionId == -1);
+
+        var endingPoint = new EndingPoint(
+            GameManager.Instance.Day, currentStoryScenario.id,
+            matchingOrder.nextScenarioID, matchingOrder.result);
         
-        var endingPoint = new EndingPoint
-        {
-            id = currentStoryScenario.id,
-            nextScenarioID = matchingOrder.nextScenarioID,
-            result = matchingOrder.result
-        };
-        DataManager.Instance.SaveGameStoryPoint(endingPoint);
+        DataManager.Instance.SaveProgress(endingPoint);
 
         craft.gameObject.SetActive(false);
         SetStory(matchingOrder.nextScenarioID);
+    }
+
+    public static bool TryMakePotion(int[] materialCount, out Potion result)
+    {
+        result = new Potion();
+        if (materialCount.Length != Enum.GetValues(typeof(Material)).Length) return false;
+
+        foreach (var potion in DataManager.Instance.potions)
+        {
+            if (potion.material.Length != Enum.GetValues(typeof(Material)).Length) return false;
+            if (potion.material.Where((t, i) => t != materialCount[i]).Any()) continue;
+
+            result = potion;
+            return true;
+        }
+
+        return false;
     }
 }

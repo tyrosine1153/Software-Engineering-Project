@@ -32,7 +32,7 @@ public class CameraControl : MonoBehaviour
     {
         if (startIndex > endIndex) (startIndex, endIndex) = (endIndex, startIndex);
         
-        var actors = GameTest.Instance.actors.Select(actor => actor.transform).ToArray();
+        var actors = GameCanvas.Instance.actors.Select(actor => actor.transform).ToArray();
         if (startIndex < 0 || endIndex > actors.Length) return;
 
         followObject.position = CameraPosition(actors[startIndex].position, actors[endIndex].position);

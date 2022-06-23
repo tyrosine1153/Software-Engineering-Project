@@ -12,8 +12,8 @@ public class Story : MonoBehaviour
     
     private void Start()
     {
-        prevScenarioButton.onClick.AddListener(GameTest.Instance.SetPrevStory);
-        nextScenarioButton.onClick.AddListener(GameTest.Instance.SetNextStory);
+        prevScenarioButton.onClick.AddListener(GameCanvas.Instance.SetPrevStory);
+        nextScenarioButton.onClick.AddListener(GameCanvas.Instance.SetNextStory);
     }
 
     public void ShowStory(StoryScenario currentStoryScenario)
