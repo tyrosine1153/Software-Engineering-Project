@@ -89,7 +89,6 @@ public class DataManager : Singleton<DataManager>
     {
         var path = filePath == null ? $"Data/{fileName}" : $"Data/{filePath}/{fileName}";
         var textAsset = Resources.Load<TextAsset>(path);
-        Debug.Log(textAsset.text);
 
         return JsonUtility.FromJson<T>(textAsset.text);
     }
