@@ -8,6 +8,8 @@ public class Craft : MonoBehaviour
     [SerializeField] private Button resetButton;
     [SerializeField] private Button submitButton;
     [SerializeField] private Button[] materialButtons;
+    [SerializeField] private Text[] materialCountTexts;
+
 
     private const int TotalLimit = 10000; // 최대 재료 추가 횟수
     private const int MaterialLimit = 5; // 재료당 최대 추가 횟수
@@ -74,6 +76,9 @@ public class Craft : MonoBehaviour
         );
         Debug.Log($"{r} {g} {b} {color}");
         potionImage.color = color;
+        materialCountTexts[0].text = $"{r}";
+        materialCountTexts[1].text = $"{g}";
+        materialCountTexts[2].text = $"{b}";
         
         // rgb값이 음수일 경우 각 이펙트 출력
         ShowPotionEffect(r < 0, b < 0, g < 0);

@@ -13,6 +13,11 @@ public class GameCanvas : Singleton<GameCanvas>
     [SerializeField] private Text dayEndDayText;
     [SerializeField] private Button dayEndButton;
     
+    [Header("HUD")]
+    [SerializeField] private Text dayText;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private GameObject settingsPanel;
+    
     [Header("Story, Craft")]
     public SpriteRenderer[] actors;
     [SerializeField] private Story story;
@@ -26,6 +31,10 @@ public class GameCanvas : Singleton<GameCanvas>
         story.gameObject.SetActive(true);
         craft.gameObject.SetActive(false);
         craftResult.gameObject.SetActive(false);
+        settingsButton.onClick.AddListener(() =>
+        {
+            settingsPanel.gameObject.SetActive(true);
+        });
     }
 
     #region Day
@@ -33,6 +42,7 @@ public class GameCanvas : Singleton<GameCanvas>
     // Day start 켜기, 일차 ui 설정
     public void ShowDayStart(int day)
     {
+        dayText.text = day == 0 ? "튜토리얼" : $"{day}일 차";
         dayStartDayText.text = day == 0 ? "튜토리얼" : $"{day}일 차";
         dayStart.SetActive(true);
         
@@ -40,7 +50,7 @@ public class GameCanvas : Singleton<GameCanvas>
     }
     
     private IEnumerator CoCloseDayStart()
-    {
+    { 
         yield return new WaitForSeconds(3f);
         dayStart.SetActive(false);
     }

@@ -4146,6 +4146,29 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uC74C\uC18C\uAC70"
+--- !u!114 &7933455508093110613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460434211131746665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05440d4e41f34537ab64e37504deaac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSlider: {fileID: 403589615}
+  bgmHandleText: {fileID: 1398152121}
+  bgmMuteToggle: {fileID: 1645763183}
+  sfxSlider: {fileID: 855249350}
+  sfxHandleText: {fileID: 1341919252}
+  sfxMuteToggle: {fileID: 789982386}
+  resolutionDropdown: {fileID: 126753120}
+  fullScreenToggle: {fileID: 1003749320}
+  entryButton: {fileID: 49318275}
+  cancelButton: {fileID: 1306835931}
+  effectToggle: {fileID: 1239098623}
 --- !u!1001 &5349587458547967355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4176,6 +4199,22 @@ PrefabInstance:
     - target: {fileID: 1844066743170326325, guid: cccfd769c7ae66241bd1d9314df4e3cf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391658106191038885, guid: cccfd769c7ae66241bd1d9314df4e3cf, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391658106191038885, guid: cccfd769c7ae66241bd1d9314df4e3cf, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391658106191038885, guid: cccfd769c7ae66241bd1d9314df4e3cf, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391658106191038885, guid: cccfd769c7ae66241bd1d9314df4e3cf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3626700845915674000, guid: cccfd769c7ae66241bd1d9314df4e3cf, type: 3}
       propertyPath: m_Sprite
@@ -4354,5 +4393,10 @@ PrefabInstance:
 --- !u!224 &3916387047692570124 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8963359760607538039, guid: cccfd769c7ae66241bd1d9314df4e3cf, type: 3}
+  m_PrefabInstance: {fileID: 5349587458547967355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1460434211131746665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6807485910250621970, guid: cccfd769c7ae66241bd1d9314df4e3cf, type: 3}
   m_PrefabInstance: {fileID: 5349587458547967355}
   m_PrefabAsset: {fileID: 0}
