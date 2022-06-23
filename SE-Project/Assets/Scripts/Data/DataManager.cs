@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -15,65 +14,61 @@ public class DataManager : Singleton<DataManager>
     {
         base.Awake();
 
-        const int currentDay = 3;
         var gameData = Resources.Load<GameDataScriptableObject>("Data/GameData");
         potions = gameData.potions;
         characters = gameData.characters;
         endingPoints = LoadByJson<List<EndingPoint>>("EndingPoints");
-        storyScenario = LoadByJson<FuckingStoryScenarioArray>(currentDay.ToString(), "StoryScenario").scenarios;
-
-        storyScenario = storyScenario.OrderBy(s => s.id).ToArray();
-    }
-
-    public static bool TryMakePotion(int[] materialCount, out Potion result)
-    {
-        result = new Potion();
-        if (materialCount.Length != Enum.GetValues(typeof(Material)).Length) return false;
-
-        foreach (var potion in Instance.potions)
-        {
-            if (potion.material.Length != Enum.GetValues(typeof(Material)).Length) return false;
-            if (potion.material.Where((t, i) => t != materialCount[i]).Any()) continue;
-
-            result = potion;
-            return true;
-        }
-
-        return false;
     }
 
     #region Save/Load
 
+    public void LoadScenario(int day)
+    {
+        storyScenario = LoadByJson<FuckingStoryScenarioArray>(day.ToString(), "StoryScenario").scenarios;
+        storyScenario = storyScenario.OrderBy(s => s.id).ToArray();
+    }
+    
     public void SaveScenario()
     {
         SaveByJson(storyScenario, "StoryScenario");
     }
     
-    public void SaveGameStoryPoint(int scenarioId)
+    public void ResetProgress()
     {
-        PlayerPrefs.SetInt("StoryPoint", scenarioId);
-    }
-
-    public void SaveGameStoryPoint(EndingPoint endingPoint)
-    {
-        endingPoints.Add(endingPoint);
-        SaveByJson(endingPoints, "EndingPoints");
-        
-        PlayerPrefs.SetInt("StoryPoint", endingPoint.nextScenarioID);
-    }
-    
-    public int LoadGameStoryPoint()
-    {
-        return PlayerPrefs.GetInt("StoryPoint", 0);
-    }
-    
-    public void ResetGameStoryPoint()
-    {
-        PlayerPrefs.SetInt("StoryPoint", 0);
+        SaveProgress();
         
         endingPoints.Clear();
         SaveByJson(endingPoints, "EndingPoints");
     }
+    
+    public (int day, int scenario) LoadProgress()
+    {
+        endingPoints = LoadByJson<List<EndingPoint>>("EndingPoints");
+
+        return (PlayerPrefs.GetInt("DayPoint", 0), PlayerPrefs.GetInt("StoryPoint", 0));
+    }
+    
+    public static void SaveProgress(int day = 0, int scenarioId = 0)
+    {
+        PlayerPrefs.SetInt("DayPoint", day);
+        PlayerPrefs.SetInt("StoryPoint", scenarioId);
+    }
+
+    public void SaveProgress(EndingPoint endingPoint)
+    {
+        endingPoints.Add(endingPoint);
+        SaveByJson(endingPoints, "EndingPoints");
+        
+        SaveProgress(endingPoint.day, endingPoint.nextScenarioID);
+    }
+    
+    // Day, Scenario id, ending points
+    // 새로 하기
+    // 이어하기
+    // 게임 저장
+    // V 음료 제공 : day, scenario id, ending point 
+    // - 일과 시작 : day, scenario id = 0, ending point = null
+    // - 새로 하기 : day = 0, scenario id = 0, ending point = null
     #endregion
     
     #region File IO

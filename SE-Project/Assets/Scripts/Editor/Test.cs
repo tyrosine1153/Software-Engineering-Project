@@ -188,13 +188,14 @@ public static class Test
         log.AppendLine($"Serve Result : {matchingOrder.potionId} {matchingOrder.nextScenarioID} {matchingOrder.result}");
 
         var endingPoint = new EndingPoint
-        {
-            id = currentStory.id,
-            nextScenarioID = matchingOrder.nextScenarioID,
-            result = matchingOrder.result
-        };
+        (
+            1,
+            currentStory.id,
+            matchingOrder.nextScenarioID,
+            matchingOrder.result
+        );
 
-        DataManager.Instance.SaveGameStoryPoint(endingPoint);
+        DataManager.Instance.SaveProgress(endingPoint);
         log.AppendLine($"Save EndingPoint : {endingPoint.id} {endingPoint.nextScenarioID} {endingPoint.result}");
     }
 

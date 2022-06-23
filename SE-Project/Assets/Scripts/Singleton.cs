@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-
 [DisallowMultipleComponent]
 public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
     public bool dontDestroyOnLoad;
 
     private static volatile T _instance;
-    private static object _syncRoot = new System.Object();
+    private static object _syncRoot = new object();
 
     public static T Instance
     {
@@ -18,23 +17,17 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         }
     }
 
-    public static bool IsInitialized
-    {
-        get
-        {
-            return _instance != null;
-        }
-    }
+    public static bool IsInitialized => _instance != null;
 
     public static void Initialize()
     {
-        if (_instance != null)
+        if (IsInitialized)
         {
             return;
         }
         lock (_syncRoot)
         {
-            _instance = GameObject.FindObjectOfType<T>();
+            _instance = FindObjectOfType<T>();
 
             if (_instance == null)
             {
@@ -46,10 +39,10 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 
     protected virtual void Awake()
     {
-        if (_instance != null)
+        if (IsInitialized)
         {
             Debug.LogError(GetType().Name + " Singleton class is already created.");
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         if (dontDestroyOnLoad)

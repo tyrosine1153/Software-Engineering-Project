@@ -20,7 +20,16 @@ public class OrderOption
 [Serializable]
 public class EndingPoint
 {
+    public int day;
     public int id;
     public int nextScenarioID;
     public int result;  // 결과값 (임시) => 엔딩 분기를 결정하는 분기 포인트? : 아직 엔딩 결정이 미구현 임으로 result로 해둠
+    
+    public EndingPoint(int day, int id, int nextScenarioID, int result)
+    {
+        this.day = day;
+        this.id = id;
+        this.nextScenarioID = nextScenarioID;
+        this.result = result;
+    }
 }
