@@ -48,7 +48,7 @@ public class DataManager : Singleton<DataManager>
         return (PlayerPrefs.GetInt("DayPoint", 0), PlayerPrefs.GetInt("StoryPoint", 0));
     }
     
-    public static void SaveProgress(int day = 0, int scenarioId = 0)
+    public void SaveProgress(int day = 1, int scenarioId = 0)
     {
         PlayerPrefs.SetInt("DayPoint", day);
         PlayerPrefs.SetInt("StoryPoint", scenarioId);

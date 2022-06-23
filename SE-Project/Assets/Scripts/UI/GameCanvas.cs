@@ -1,10 +1,20 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameCanvas : Singleton<GameCanvas>
 {
-    [SerializeField] public SpriteRenderer[] actors;
+    [Header("Day")]
+    [SerializeField] private GameObject dayStart;
+    [SerializeField] private Text dayStartDayText;
+    [SerializeField] private GameObject dayEnd;
+    [SerializeField] private Text dayEndDayText;
+    [SerializeField] private Button dayEndButton;
+    
+    [Header("Story, Craft")]
+    public SpriteRenderer[] actors;
     [SerializeField] private Story story;
     [SerializeField] private Craft craft;
     [SerializeField] private CraftResult craftResult;
@@ -16,9 +26,43 @@ public class GameCanvas : Singleton<GameCanvas>
         story.gameObject.SetActive(true);
         craft.gameObject.SetActive(false);
         craftResult.gameObject.SetActive(false);
-   
-        SetStory(0);
     }
+
+    #region Day
+
+    // Day start 켜기, 일차 ui 설정
+    public void ShowDayStart(int day)
+    {
+        dayStartDayText.text = day == 0 ? "튜토리얼" : $"{day}일 차";
+        dayStart.SetActive(true);
+        
+        StartCoroutine(CoCloseDayStart());
+    }
+    
+    private IEnumerator CoCloseDayStart()
+    {
+        yield return new WaitForSeconds(3f);
+        dayStart.SetActive(false);
+    }
+
+    // Day end 켜기, ui : 일차 해금된 레시피
+    public void ShowDayEnd(int day)
+    {
+        dayEndDayText.text = day == 0 ? "튜토리얼" : $"{day}일 차";
+        // Todo : 오늘 공개된 레시피 출력
+        dayEnd.SetActive(true);
+        
+        dayEndButton.onClick.AddListener(() =>
+        {
+            // Todo : 오늘 공개된 레시피 리스트 지우기
+            GameManager.Instance.DayEnd();
+            dayEnd.SetActive(false);
+        });
+    }
+
+    #endregion
+
+    #region Story/Craft
 
     public void SetStory(int id)
     {
@@ -32,8 +76,9 @@ public class GameCanvas : Singleton<GameCanvas>
         }
         else
         {
-            var nextStory = DataManager.Instance.storyScenario.First(s => s.id == currentStoryScenario.nextId);
-            if (nextStory.prevId == -1)
+            var nextStory = DataManager.Instance.storyScenario.FirstOrDefault(s => s.id == currentStoryScenario.nextId);
+
+            if (nextStory != null && nextStory.prevId == -1)
             {
                 nextStory.prevId = currentStoryScenario.id;
             }
@@ -66,7 +111,7 @@ public class GameCanvas : Singleton<GameCanvas>
         
         if (currentStoryScenario.nextId == -1)
         {
-            // Todo : Story End
+            ShowDayEnd(GameManager.Instance.currentDay);
             return;
         }
         SetStory(currentStoryScenario.nextId);
@@ -96,7 +141,7 @@ public class GameCanvas : Singleton<GameCanvas>
                             currentStoryScenario.order.First(o => o.potionId == -1);
 
         var endingPoint = new EndingPoint(
-            GameManager.Instance.Day, currentStoryScenario.id,
+            GameManager.Instance.currentDay, currentStoryScenario.id,
             matchingOrder.nextScenarioID, matchingOrder.result);
         
         DataManager.Instance.SaveProgress(endingPoint);
@@ -121,4 +166,6 @@ public class GameCanvas : Singleton<GameCanvas>
 
         return false;
     }
+    
+    #endregion
 }

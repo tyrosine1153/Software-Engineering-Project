@@ -20,7 +20,7 @@ public class Story : MonoBehaviour
     {
         // Hide Buttons 
         prevScenarioButton.gameObject.SetActive(currentStoryScenario.prevId != -1);
-        nextScenarioButton.gameObject.SetActive(currentStoryScenario.nextId != -1);
+        // nextScenarioButton.gameObject.SetActive(currentStoryScenario.nextId != -1);
 
         // Display Text
         speakerText.text = currentStoryScenario.speaker;
@@ -28,8 +28,8 @@ public class Story : MonoBehaviour
         print($"{currentStoryScenario.prevId} <- {currentStoryScenario.id} -> {currentStoryScenario.nextId}");
         
         // Todo : Add Effects
-        if (currentStoryScenario.effects[(int)EffectType.None] != 1) { }
-        else { }
+        // if (currentStoryScenario.effects[(int)EffectType.None] != 1) { }
+        // else { }
 
         foreach (var scenarioCharacter in currentStoryScenario.characters)
         {

@@ -37,8 +37,8 @@ public class MainCanvas : MonoBehaviour
 
     public void Start()
     {
-        newStartButton.onClick.AddListener(() => { /* Todo */ });
-        startButton.onClick.AddListener(() => { /* Todo */ });
+        newStartButton.onClick.AddListener(() => { /* Todo */ GameManager.Instance.NewGameStart(); });
+        startButton.onClick.AddListener(() => { /* Todo */ GameManager.Instance.GameStart();});
         settingsButton.onClick.AddListener(() => { });
         quitButton.onClick.AddListener(() =>
         {

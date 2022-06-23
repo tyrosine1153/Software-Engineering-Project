@@ -137,8 +137,11 @@ GameObject:
   m_Component:
   - component: {fileID: 155228437749302053}
   - component: {fileID: 155228437749302052}
+  - component: {fileID: 6280354834447225452}
+  - component: {fileID: 692340063741678582}
+  - component: {fileID: 4525722051882228925}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,12 +175,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832de6a9262cab849b77690311fb4122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
+  dontDestroyOnLoad: 1
   bgmSource: {fileID: 155228439047460776}
   bgmClips: []
   currentBGMClip: -1
   sfxSource: {fileID: 155228437718709187}
   sfxClips: []
+--- !u!114 &6280354834447225452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155228437749302055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6309751a435842839a58b6525b355480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  currentResolutionIndex: 21
+  currentFullscreen: 1
+--- !u!114 &692340063741678582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155228437749302055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5feb03d8113d4f738d614232d9b94231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  potions: []
+  storyScenario: []
+  characters: []
+  endingPoints: []
+--- !u!114 &4525722051882228925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155228437749302055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146aaa22bc2a46c8978c14ac6e0b68d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  currentDay: 0
 --- !u!1 &155228439047460779
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,91 +4,70 @@
             "id": 0,
             "prevId": -1,
             "nextId": 1,
-            "effects": [
-                0,
-                -2,
-                2,
-                -1
-            ],
-            "speaker": "Speaker",
-            "content": "The Quick Brown Fox Jumps Over The Lazy Dog",
-            "characters": [
-                {
-                    "characterId": 0,
-                    "emotion": 0
-                },
-                {
-                    "characterId": 1,
-                    "emotion": 1
-                },
-                {
-                    "characterId": 0,
-                    "emotion": 0
-                },
-                {
-                    "characterId": 2,
-                    "emotion": 2
-                }
-            ],
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "저기요…",
+            "characters": [],
             "order": []
         },
         {
             "id": 1,
             "prevId": 0,
             "nextId": 2,
-            "effects": [
-                0,
-                -2,
-                2,
-                -1
-            ],
-            "speaker": "Speaker",
-            "content": "The Quick Brown Fox Jumps Over The Lazy Dog",
-            "characters": [
-                {
-                    "characterId": 0,
-                    "emotion": 0
-                },
-                {
-                    "characterId": 1,
-                    "emotion": 1
-                },
-                {
-                    "characterId": 0,
-                    "emotion": 0
-                },
-                {
-                    "characterId": 2,
-                    "emotion": 2
-                }
-            ],
+            "effects": [],
+            "speaker": "손녀",
+            "content": "음? 포션 사러 왔니?",
+            "characters": [],
             "order": []
         },
         {
             "id": 2,
             "prevId": 1,
             "nextId": 3,
-            "effects": [
-                0,
-                -2,
-                2,
-                -1
-            ],
-            "speaker": "Speaker",
-            "content": "The Quick Brown Fox Jumps Over The Lazy Dog",
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "ㅎ,혹시 원래 계시던 할머니는, 어디 가셨나요?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 3,
+            "prevId": 2,
+            "nextId": 4,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "지금은 많이 아프신지라, 손녀인 내가 가게를 보고 있어.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 4,
+            "prevId": 3,
+            "nextId": 5,
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "어..! 그럼..! ㅎ..호..혹시… 돌아가시는거…ㅇ…아니겠죠…",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 5,
+            "prevId": 4,
+            "nextId": 6,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "그…그럼그럼~! 당연히 아니지~ 괜찮으실거야~ ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 6,
+            "prevId": 5,
+            "nextId": 7,
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "그럼.. 다행이네요…",
             "characters": [
-                {
-                    "characterId": 0,
-                    "emotion": 0
-                },
-                {
-                    "characterId": 1,
-                    "emotion": 1
-                },
-                {
-                    "characterId": 0,
-                    "emotion": 0
-                },
                 {
                     "characterId": 2,
                     "emotion": 2
@@ -97,57 +76,388 @@
             "order": []
         },
         {
-            "id": 3,
-            "prevId": 2,
-            "nextId": 4,
-            "effects": [
-                0,
-                -2,
-                2,
-                -1
-            ],
-            "speaker": "Speaker",
-            "content": "The Quick Brown Fox Jumps Over The Lazy Dog",
+            "id": 7,
+            "prevId": 6,
+            "nextId": 8,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "그래그래… 울지말고, 눈물 뚝!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 8,
+            "prevId": 7,
+            "nextId": 9,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "그래서,무슨 포션을 사러 왔니?",
             "characters": [
                 {
-                    "characterId": 0,
-                    "emotion": 0
-                },
-                {
-                    "characterId": 1,
-                    "emotion": 1
-                },
-                {
-                    "characterId": 0,
-                    "emotion": 0
-                },
-                {
                     "characterId": 2,
-                    "emotion": 2
+                    "emotion": 0
                 }
             ],
+            "order": []
+        },
+        {
+            "id": 9,
+            "prevId": 8,
+            "nextId": 10,
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "질병…완화의…포션... 하나 주세요…! ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 10,
+            "prevId": 9,
+            "nextId": -1,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "그래~",
+            "characters": [],
             "order": [
                 {
                     "potionId": 0,
-                    "nextScenarioID": 4,
+                    "nextScenarioID": 11,
                     "result": 0
                 },
                 {
-                    "potionId": 1,
-                    "nextScenarioID": 5,
-                    "result": 1
-                },
-                {
-                    "potionId": 2,
-                    "nextScenarioID": 6,
-                    "result": 2
-                },
-                {
                     "potionId": -1,
-                    "nextScenarioID": 7,
-                    "result": 3
+                    "nextScenarioID": 11,
+                    "result": 0
                 }
             ]
+        },
+        {
+            "id": 11,
+            "prevId": -1,
+            "nextId": 12,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "자, 여기 있어!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 12,
+            "prevId": 11,
+            "nextId": 13,
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "감사합니다~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 13,
+            "prevId": 12,
+            "nextId": 14,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "근데, 질병 완화는 왜…",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 14,
+            "prevId": 13,
+            "nextId": 15,
+            "effects": [
+                0
+            ],
+            "speaker": "",
+            "content": "(문 열리는 소리) ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 15,
+            "prevId": 14,
+            "nextId": 16,
+            "effects": [],
+            "speaker": "상인",
+            "content": "여보셔~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 16,
+            "prevId": 15,
+            "nextId": 17,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "안녕하세요!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 17,
+            "prevId": 16,
+            "nextId": 18,
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "아…안녕하세요…",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 18,
+            "prevId": 17,
+            "nextId": 19,
+            "effects": [],
+            "speaker": "상인",
+            "content": "안녕~ 어르신은 어디 가시고 아가씨가 계신대?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 19,
+            "prevId": 18,
+            "nextId": 20,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "아…할머니는 쓰러지셔서 요양중이세요.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 20,
+            "prevId": 19,
+            "nextId": 21,
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "요양중이세요…",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 21,
+            "prevId": 20,
+            "nextId": 22,
+            "effects": [],
+            "speaker": "상인",
+            "content": "할머니면…아,손녀구나~!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 22,
+            "prevId": 21,
+            "nextId": 23,
+            "effects": [],
+            "speaker": "상인",
+            "content": "안 그래도 어르신이 손녀 자랑 엄청했었거든~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 23,
+            "prevId": 22,
+            "nextId": 24,
+            "effects": [],
+            "speaker": "상인",
+            "content": "똘똘하고 예쁘고 눈에 넣어도 안아플정도라고 했는데~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 24,
+            "prevId": 23,
+            "nextId": 25,
+            "effects": [],
+            "speaker": "상인",
+            "content": "잘하는게 너무 많아서 나이가 다 차면 정말이지 뭘 시킬지가 고민이라고 했었다니까~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 25,
+            "prevId": 24,
+            "nextId": 26,
+            "effects": [],
+            "speaker": "상인",
+            "content": "나 처럼 상인이 되는 것도 좋고 할머니처럼 약물 만드는 것도 좋고~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 26,
+            "prevId": 25,
+            "nextId": 27,
+            "effects": [],
+            "speaker": "상인",
+            "content": "직업 얘기하니까 생각났는데 이웃마을에서는 말이지~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 27,
+            "prevId": 26,
+            "nextId": 28,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "잠깐! 잠깐만요!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 28,
+            "prevId": 27,
+            "nextId": 29,
+            "effects": [],
+            "speaker": "상인",
+            "content": "응? 왜?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 29,
+            "prevId": 28,
+            "nextId": 30,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "어…일단 주문 먼저 해주실수 있으실까요..!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 30,
+            "prevId": 29,
+            "nextId": 31,
+            "effects": [],
+            "speaker": "상인",
+            "content": "아~ 미안미안~ 잡담을 하는게 오랜만이라서~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 31,
+            "prevId": 30,
+            "nextId": 32,
+            "effects": [],
+            "speaker": "상인",
+            "content": "음, 그럼~ 체력 강화의 물약 하나 줄래~? 요새 몸이 너무 지쳐서~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 32,
+            "prevId": 31,
+            "nextId": -1,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "그런 이유로 마셔도 되는건가요…",
+            "characters": [],
+            "order": [
+                {
+                    "potionId": 2,
+                    "nextScenarioID": 33,
+                    "result": 0
+                }
+            ]
+        },
+        {
+            "id": 33,
+            "prevId": -1,
+            "nextId": 34,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "여기요!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 34,
+            "prevId": 33,
+            "nextId": 35,
+            "effects": [],
+            "speaker": "손녀",
+            "content": "여기요!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 35,
+            "prevId": 34,
+            "nextId": 36,
+            "effects": [],
+            "speaker": "상인",
+            "content": "고마워~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 36,
+            "prevId": 35,
+            "nextId": 37,
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "아줌마는 무슨 일 하세요..?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 37,
+            "prevId": 36,
+            "nextId": 38,
+            "effects": [],
+            "speaker": "상인",
+            "content": "음~ 마을 오가면서 물건 파는 일?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 38,
+            "prevId": 37,
+            "nextId": 39,
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "와…! 그러면, 이웃마을도 가봤겠다…",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 39,
+            "prevId": 38,
+            "nextId": 40,
+            "effects": [],
+            "speaker": "상인",
+            "content": "그치그치~ 되게 많이 가보지~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 40,
+            "prevId": 39,
+            "nextId": 41,
+            "effects": [],
+            "speaker": "상인",
+            "content": "꼬마는~ 마을 밖을 가본 적이 없니~?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 41,
+            "prevId": 40,
+            "nextId": 42,
+            "effects": [],
+            "speaker": "여자아이",
+            "content": "네… 이웃 마을은 어떻게 생겼어요…?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 42,
+            "prevId": 41,
+            "nextId": -1,
+            "effects": [],
+            "speaker": "상인",
+            "content": "음…여기랑 비슷하게 생겼어.",
+            "characters": [],
+            "order": []
         }
     ]
 }
