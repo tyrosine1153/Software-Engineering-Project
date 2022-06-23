@@ -380,6 +380,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &590646358
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3915328035958216061, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_Name
+      value: Data Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915328035958216067, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c3cbb478cbc45a64c8ad5e67fa9a2fa7, type: 3}
 --- !u!114 &789982386 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 789982386, guid: ab066fdde094b0d489a9673a388b01f1, type: 3}
@@ -1997,6 +2054,10 @@ PrefabInstance:
     - target: {fileID: 8201083563335509166, guid: 0d4518aed3c0a744ab47bdd3535c92ad, type: 3}
       propertyPath: m_Name
       value: Story Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201083563335509166, guid: 0d4518aed3c0a744ab47bdd3535c92ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8201083563335509169, guid: 0d4518aed3c0a744ab47bdd3535c92ad, type: 3}
       propertyPath: m_Pivot.x
