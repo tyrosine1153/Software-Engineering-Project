@@ -356,6 +356,11 @@
                     "potionId": 2,
                     "nextScenarioID": 33,
                     "result": 0
+                },
+                {
+                    "potionId": -1,
+                    "nextScenarioID": 33,
+                    "result": 0
                 }
             ]
         },

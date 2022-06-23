@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 201272914}
   - component: {fileID: 201272913}
   m_Layer: 5
-  m_Name: Potion material  (2)
+  m_Name: Potion material B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -978,7 +978,7 @@ GameObject:
   - component: {fileID: 274354552}
   - component: {fileID: 274354551}
   m_Layer: 5
-  m_Name: Potion material  (3)
+  m_Name: Potion material C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3045,7 +3045,7 @@ GameObject:
   - component: {fileID: 915669566}
   - component: {fileID: 915669565}
   m_Layer: 5
-  m_Name: Potion material  (1)
+  m_Name: Potion material G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3933,10 +3933,10 @@ MonoBehaviour:
   submitButton: {fileID: 871797386}
   materialButtons:
   - {fileID: 1595578734}
-  - {fileID: 915669565}
+  - {fileID: 1661403812}
   - {fileID: 201272913}
   - {fileID: 274354551}
-  - {fileID: 1661403812}
+  - {fileID: 915669565}
   - {fileID: 1740822861}
   materialCountTexts:
   - {fileID: 1332768869}
@@ -4481,7 +4481,7 @@ GameObject:
   - component: {fileID: 1595578732}
   - component: {fileID: 1595578734}
   m_Layer: 5
-  m_Name: 'Potion material '
+  m_Name: Potion material R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4680,7 +4680,7 @@ GameObject:
   - component: {fileID: 1661403813}
   - component: {fileID: 1661403812}
   m_Layer: 5
-  m_Name: Potion material  (4)
+  m_Name: Potion material M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5238,7 +5238,7 @@ GameObject:
   - component: {fileID: 1740822862}
   - component: {fileID: 1740822861}
   m_Layer: 5
-  m_Name: Potion material  (5)
+  m_Name: Potion material Y
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
