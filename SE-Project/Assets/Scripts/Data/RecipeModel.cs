@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Recipe
@@ -23,7 +24,6 @@ public class RecipeModel : Singleton<RecipeModel>
     public List<Recipe> recipes = new List<Recipe>();
     public readonly (int start, int end)[] potionOpenWeekendData =
     {
-        (-1, -1),
         (0, 3),
         (4, 7),
         (8, 10),
@@ -76,16 +76,9 @@ public class RecipeModel : Singleton<RecipeModel>
 
     public List<Potion> GetUnlockedPotions()
     {
-        var result = new List<Potion>();
-        foreach (var recipe in recipes)
-        {
-            if (recipe.IsPotionUnlocked)
-            {
-                result.Add(DataManager.Instance.potions[recipe.PotionId]);
-            }
-        }
-
-        return result;
+        var potions = DataManager.Instance.potions;
+        return recipes.Where(recipe => recipe.IsPotionUnlocked)
+            .Select(recipe => potions.First(potion => potion.id == recipe.PotionId)).ToList();
     }
 
     // === === === === END === === === === //
