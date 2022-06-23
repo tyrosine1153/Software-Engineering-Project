@@ -133,14 +133,14 @@ public class GameCanvas : Singleton<GameCanvas>
         // Todo : 포션 레시피 해금 여부 결정, 포션 레시피 힌트
         if (success)
         {
-            if (RecipeModel.Instance.recipes[potion.id].IsRecipeUnlock)
+            if (RecipeModel.Instance.Recipes[potion.id].IsRecipeUnlock)
             {
                 // 이미 만든 상태
             }
             else
             {
                 // 만들지 않은 상태
-                RecipeModel.Instance.recipes[potion.id].IsRecipeUnlock = true;
+                RecipeModel.Instance.Recipes[potion.id].IsRecipeUnlock = true;
                 RecipeModel.Instance.AddWeeklyUnlockedRecipes(potion.id);
             }
         }

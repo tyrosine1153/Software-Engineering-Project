@@ -6,10 +6,18 @@ using UnityEngine;
 
 public class Recipe
 {
-    public int PotionId { get; set; }
-    public bool IsPotionUnlocked { get; set; }
-    public bool IsRecipeUnlock { get; set; }
-    public OpenStatus Status { get; set; }
+    public readonly int PotionId;
+    public bool IsPotionUnlocked;
+    public bool IsRecipeUnlock;
+    public OpenStatus Status;
+    
+    public Recipe(int potionId, bool isPotionUnlocked, bool isRecipeUnlock, OpenStatus status)
+    {
+        PotionId = potionId;
+        IsPotionUnlocked = isPotionUnlocked;
+        IsRecipeUnlock = isRecipeUnlock;
+        Status = status;
+    }
 }
 
 public enum OpenStatus
@@ -20,9 +28,9 @@ public enum OpenStatus
 }
 public class RecipeModel : Singleton<RecipeModel>
 {
-    public List<Recipe> weeklyUnlockedRecipes = new List<Recipe>();
-    public List<Recipe> recipes = new List<Recipe>();
-    public readonly (int start, int end)[] potionOpenWeekendData =
+    public List<Recipe> DailyUnlockedRecipes = new List<Recipe>();
+    public List<Recipe> Recipes = new List<Recipe>();
+    public readonly (int start, int end)[] WeeklyUnlockPotion =
     {
         (0, 3),
         (4, 7),
@@ -37,47 +45,37 @@ public class RecipeModel : Singleton<RecipeModel>
 
     public void ResetRecipes()
     {
-        foreach (var potion in DataManager.Instance.potions)
-        {
-            recipes.Add(
-                new Recipe
-                {
-                    PotionId = potion.id,
-                    IsPotionUnlocked = false,
-                    IsRecipeUnlock = false,
-                    Status = OpenStatus.Hide
-                }
-             );
-        }
+        Recipes = DataManager.Instance.potions
+            .Select(potion => new Recipe(potion.id, false, false, OpenStatus.Hide))
+            .ToList();
     }
 
-    public void ResetWeeklyUnlockedRecipes()
+    public void ResetDailyUnlockedRecipes()
     {
         // 이전 주에 새로 만든 포션 리스트 초기화 
-        weeklyUnlockedRecipes = new List<Recipe>();
+        DailyUnlockedRecipes = new List<Recipe>();
     }
     
     public void AddWeeklyUnlockedRecipes(int id)
     {
-        weeklyUnlockedRecipes.Add(recipes[id]);
+        DailyUnlockedRecipes.Add(Recipes[id]);
     }
 
-    public void UnlockWeeklyRecipes(int week)
+    public void UnlockWeeklyPotions(int week)
     {
-        // 이번주 레시피 해금
-        // week 0 = Tutorial
-        var potionIdRange = potionOpenWeekendData[week];
+        // 이번주 포션 해금, week 0 = Tutorial
+        var potionRange = WeeklyUnlockPotion[week];
         
-        for (var i = potionIdRange.start; i <= potionIdRange.end; i++)
+        for (var i = potionRange.start; i <= potionRange.end; i++)
         {
-            recipes[i].IsPotionUnlocked = true;
+            Recipes[i].IsPotionUnlocked = true;
         }
     }
 
     public List<Potion> GetUnlockedPotions()
     {
         var potions = DataManager.Instance.potions;
-        return recipes.Where(recipe => recipe.IsPotionUnlocked)
+        return Recipes.Where(recipe => recipe.IsPotionUnlocked)
             .Select(recipe => potions.First(potion => potion.id == recipe.PotionId)).ToList();
     }
 
@@ -85,7 +83,7 @@ public class RecipeModel : Singleton<RecipeModel>
     
     public List<Recipe> GetShowRecipes()
     {
-        foreach (var recipe in recipes)
+        foreach (var recipe in Recipes)
         {
             if (!recipe.IsRecipeUnlock)
             {
@@ -101,21 +99,21 @@ public class RecipeModel : Singleton<RecipeModel>
             }
         }
 
-        return recipes;
+        return Recipes;
     }
     
     public OpenStatus GetRecipeStatus(int id)
     {
-        if (recipes[id].IsRecipeUnlock)
+        if (Recipes[id].IsRecipeUnlock)
         {
             // 이미 열려 있음
             return OpenStatus.RecipeUnlock;
         }
 
-        if (recipes[id].IsPotionUnlocked)
+        if (Recipes[id].IsPotionUnlocked)
         {
             // 새롭게 해금한 레시피
-            recipes[id].IsRecipeUnlock = true;
+            Recipes[id].IsRecipeUnlock = true;
             return OpenStatus.PotionUnlocked;
         }
         

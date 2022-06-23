@@ -37,7 +37,7 @@ public class GameManager : Singleton<GameManager>
         DataManager.Instance.LoadScenario(currentDay);
         GameCanvas.Instance.SetStory(scenarioId);
         GameCanvas.Instance.ShowDayStart(currentDay);
-        RecipeModel.Instance.UnlockWeeklyRecipes(currentDay / 7);
+        RecipeModel.Instance.UnlockWeeklyPotions(currentDay / 7);
     }
 
     public void DayEnd()
