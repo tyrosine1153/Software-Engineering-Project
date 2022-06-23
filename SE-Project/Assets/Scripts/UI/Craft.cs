@@ -25,6 +25,15 @@ public class Craft : MonoBehaviour
         var materialCount = Enum.GetValues(typeof(Material)).Length;
         for (var i = 0; i < materialButtons.Length; i++)
         {
+            
+            // 0 => 0 : R
+            // 1 => 1 : M
+            // 2 => 2 : B
+            
+            // 3 => 0 : C
+            // 4 => 1 : G
+            // 5 => 2 : Y
+            
             var arg = (Material)(i % materialCount);
             var plus = i % 2 == 0;
             materialButtons[i].onClick.AddListener(() => AddPotionMaterial(arg, plus));
@@ -49,7 +58,8 @@ public class Craft : MonoBehaviour
         if (TotalLimit <= totalCount) return; // 전체 조합 물약 개수 제한
 
         var index = (int)potionMaterial;
-        if (MaterialLimit < Mathf.Abs(counts[index] + (plus ? 1 : -1))) return; // 물약 종류별 제한
+        var result = counts[index] + (plus ? 1 : -1);
+        if (0 > result || result > MaterialLimit) return; // 물약 종류별 제한
 
         totalCount++;
         if (plus)
@@ -68,9 +78,9 @@ public class Craft : MonoBehaviour
         var b = counts[(int)Material.B];
 
         var color = new Color(
-            1 - Math.Abs(r) * ColorRatio,
-            1 - Math.Abs(g) * ColorRatio,
-            1 - Math.Abs(b) * ColorRatio
+            Math.Abs(r) * ColorRatio,
+            Math.Abs(g) * ColorRatio,
+            Math.Abs(b) * ColorRatio
         );
         Debug.Log($"{r} {g} {b} {color}");
         potionImage.color = color;

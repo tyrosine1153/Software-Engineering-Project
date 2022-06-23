@@ -307,6 +307,9 @@ MonoBehaviour:
     - potionId: 2
       nextScenarioID: 33
       result: 0
+    - potionId: -1
+      nextScenarioID: 33
+      result: 0
   - id: 33
     prevId: -1
     nextId: 34
