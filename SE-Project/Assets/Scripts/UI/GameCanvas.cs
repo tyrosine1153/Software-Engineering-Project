@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -127,11 +127,27 @@ public class GameCanvas : Singleton<GameCanvas>
     {
         var success = TryMakePotion(materialCount, out var potion);
         
+        // 이미 만든 적이 있는가?
+        // IsPotionUnlocked => Weekend Unlocked
+        // IsRecipeUnlocked => Creat Unlocked
         // Todo : 포션 레시피 해금 여부 결정, 포션 레시피 힌트
+        if (success)
+        {
+            if (RecipeModel.Instance.recipes[potion.id].IsRecipeUnlock)
+            {
+                // 이미 만든 상태
+            }
+            else
+            {
+                // 만들지 않은 상태
+                RecipeModel.Instance.recipes[potion.id].IsRecipeUnlock = true;
+                RecipeModel.Instance.AddWeeklyUnlockedRecipes(potion.id);
+            }
+        }
         craftResult.gameObject.SetActive(true);
         craftResult.ShowResult(success, potion);
     }
-
+    
     public void GetPotionStory(Potion potion)
     {
         craftResult.gameObject.SetActive(false);
@@ -155,7 +171,9 @@ public class GameCanvas : Singleton<GameCanvas>
         result = new Potion();
         if (materialCount.Length != Enum.GetValues(typeof(Material)).Length) return false;
 
-        foreach (var potion in DataManager.Instance.potions)
+        // 해금된 포션 list
+        var unlockedPotions = RecipeModel.Instance.GetUnlockedPotions();
+        foreach (var potion in unlockedPotions)
         {
             if (potion.material.Length != Enum.GetValues(typeof(Material)).Length) return false;
             if (potion.material.Where((t, i) => t != materialCount[i]).Any()) continue;
