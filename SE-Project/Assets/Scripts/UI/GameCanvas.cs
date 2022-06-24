@@ -110,7 +110,7 @@ public class GameCanvas : Singleton<GameCanvas>
             var line = Instantiate(recipeBookPotionLine, recipeBookViewContent);
             var potion = DataManager.Instance.potions[recipe.PotionId];
             line.GetComponent<PotionLine>().Set(SpriteUtil.LoadPotionSprite(potion.id), 
-                potion.name, recipe.IsPotionUnlocked ? potion.material : null);
+                potion.name, recipe.IsRecipeUnlock ? potion.material : null);
         }
         
     }
@@ -186,9 +186,8 @@ public class GameCanvas : Singleton<GameCanvas>
         // Todo : 포션 레시피 해금 여부 결정, 포션 레시피 힌트
         if (success && !RecipeModel.Instance.Recipes[potion.id].IsRecipeUnlock)
         {
-            RecipeModel.Instance.Recipes[potion.id].IsRecipeUnlock = true;
             RecipeModel.Instance.AddDailyUnlockedRecipes(potion.id);
-            RecipeBookUpdate();
+            
         }
         craftResult.gameObject.SetActive(true);
         craftResult.ShowResult(success, potion);
