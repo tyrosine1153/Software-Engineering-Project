@@ -9,6 +9,7 @@ public class CraftResult : MonoBehaviour
     [SerializeField] private Image potionImage;
     [SerializeField] private Text potionNameText;
     [SerializeField] private Text potionDescriptionText;
+    [SerializeField] private Text unlockedPotionText;
     private Potion _potion;
 
     private void Start()
@@ -29,9 +30,18 @@ public class CraftResult : MonoBehaviour
 
     public void ShowResult(bool success, Potion result = null)
     {
+        unlockedPotionText.text = "";
         _potion = result;
         if (success && result != null)
         {
+            if (!RecipeModel.Instance.Recipes[result.id].IsRecipeUnlock)
+            {
+                RecipeModel.Instance.Recipes[result.id].IsRecipeUnlock = true;
+                GameCanvas.Instance.RecipeBookUpdate();
+                // 신규 해금 텍스트 추가
+                unlockedPotionText.text = "[신규 포션 레시피 해금]";
+            }
+
             potionImage.sprite = SpriteUtil.LoadPotionSprite(result.id);
             potionNameText.text = result.name;
             potionDescriptionText.text = result.description;

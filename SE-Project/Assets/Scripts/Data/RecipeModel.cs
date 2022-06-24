@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Serializable]
 public class Recipe
 {
     public readonly int PotionId;
@@ -85,6 +86,13 @@ public class RecipeModel : Singleton<RecipeModel>
     {
         var potions = DataManager.Instance.potions;
         return Recipes.Where(recipe => recipe.IsPotionUnlocked)
+            .Select(recipe => potions.First(potion => potion.id == recipe.PotionId)).ToList();
+    }
+    
+    public List<Potion> GetUnlockedRecipes()
+    {
+        var potions = DataManager.Instance.potions;
+        return Recipes.Where(recipe => recipe.IsRecipeUnlock)
             .Select(recipe => potions.First(potion => potion.id == recipe.PotionId)).ToList();
     }
 
