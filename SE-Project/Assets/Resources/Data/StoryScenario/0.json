@@ -1,0 +1,333 @@
+{
+    "scenarios": [
+        {
+            "id": 0,
+            "prevId": -1,
+            "nextId": 1,
+            "effects": [
+                1,
+                2
+            ],
+            "speaker": "할머니",
+            "content": "자, 허브. 오늘부터는 네게도 물약을 만드는 법에 대해 알려주마.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 1,
+            "prevId": 0,
+            "nextId": 2,
+            "effects": [],
+            "speaker": "허브",
+            "content": "정말요..? 와! 신난다!!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 2,
+            "prevId": 1,
+            "nextId": 3,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "녀석, 그 정도로 기뻐하기는… 그러면 무엇부터 시작해야 할까... 그래, 물약의 재료에 대해서 먼저 알려주마.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 3,
+            "prevId": 2,
+            "nextId": 4,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "여기 여섯 종류의 시약이 있지?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 4,
+            "prevId": 3,
+            "nextId": 5,
+            "effects": [],
+            "speaker": "허브",
+            "content": "네!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 5,
+            "prevId": 4,
+            "nextId": 6,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "하나하나 설명해주마.",
+            "characters": [],
+            "order": [
+                {
+                    "potionId": -1,
+                    "nextScenarioID": 24,
+                    "result": 0
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "prevId": 5,
+            "nextId": 7,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "여기 붉은 꽃 잎사귀부터 시작하자꾸나. 이 붉은 꽃 잎사귀는 우리의 몸을 재생시키는 ‘체’의 기운이 들어간 약초란다. 상처를 낫게 해주지.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 7,
+            "prevId": 6,
+            "nextId": 8,
+            "effects": [],
+            "speaker": "소녀",
+            "content": "음… 알..것 같아요~",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 8,
+            "prevId": 7,
+            "nextId": 9,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "다음은 약초 꾸러미란다. 이 약초 꾸러미는 기운을 북돋아주는 ‘기’의 기운이 들어간 약초들을 모아 두었단다.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 9,
+            "prevId": 8,
+            "nextId": 10,
+            "effects": [],
+            "speaker": "허브",
+            "content": "기운이요...?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 10,
+            "prevId": 9,
+            "nextId": 11,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "흠... 피로가 회복되고, 몸에 힘이 돌아온다고 하면 이해가 쉽겠니?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 11,
+            "prevId": 10,
+            "nextId": 12,
+            "effects": [],
+            "speaker": "소녀",
+            "content": "음…네!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 12,
+            "prevId": 11,
+            "nextId": 13,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "마지막은 이 약수란다. 할머니가 직접 정상에서 떠 온 물이지. 이건 정신을 맑게 만들어서 잡생각을 없애는 ‘심’의 기운이 가득 들어있단다.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 13,
+            "prevId": 12,
+            "nextId": 14,
+            "effects": [],
+            "speaker": "허브",
+            "content": "이해했어요! ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 14,
+            "prevId": 13,
+            "nextId": 15,
+            "effects": [],
+            "speaker": "허브",
+            "content": "어? 그런데 저기 있는 포션은 여섯 개잖아요. 나머지는요?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 16,
+            "prevId": 15,
+            "nextId": 17,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "호호… 나머지 세 가지 포션에 대해서도 설명해주마. 설명해주는 겸, 간단한 포션을 만들어보자꾸나.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 16,
+            "prevId": 15,
+            "nextId": 17,
+            "effects": [],
+            "speaker": "허브",
+            "content": "앗! 바로요?",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 17,
+            "prevId": 16,
+            "nextId": 18,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "그래. 첫번째로 만들 물약은 상처 회복의 물약이란다. 조합법은 내가 가르쳐주마. 붉은 꽃 잎사귀 3번, 약초 꾸러미 2번, 약수 1번을 넣으면 된단다. 각각 재료들은 5번까지 넣을 수 있으니 조심하렴.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 18,
+            "prevId": 17,
+            "nextId": 19,
+            "effects": [],
+            "speaker": "소녀",
+            "content": "만약에 실수로 하나를 더 넣으면 어떡해요? ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 19,
+            "prevId": 18,
+            "nextId": 20,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "호호, 그럴 때를 위한 게 이 세 가지 시약이란다. ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 20,
+            "prevId": 19,
+            "nextId": 21,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "박하 가루는 붉은 꽃 잎사귀를, ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 21,
+            "prevId": 20,
+            "nextId": 22,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "보랏빛 버섯 가루는 빻은 약초 꾸러미를, ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 22,
+            "prevId": 21,
+            "nextId": 23,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "금색 허브 는 약수를 중화시켜 준단다. ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 23,
+            "prevId": 22,
+            "nextId": 24,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "하나를 실수로 더 넣었으면, 마찬가지로 하나를 더 넣으면 되지.",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 24,
+            "prevId": 23,
+            "nextId": 25,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "은은히 나는 달콤한 향을 보니… 완벽하구나!",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 25,
+            "prevId": 24,
+            "nextId": 26,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "그럼 다음으로 알려줄 물약은 질병 완화, 체력 강화, 상처 재생의 물약이란다. ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 26,
+            "prevId": 25,
+            "nextId": 27,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "붉은 꽃 잎사귀에들어있는 체의 기운이 가장 많이 담겨있지. ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 27,
+            "prevId": 26,
+            "nextId": 28,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "각각 조합법으은… ",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 28,
+            "prevId": 27,
+            "nextId": 29,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "어어…",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 29,
+            "prevId": 28,
+            "nextId": 30,
+            "effects": [],
+            "speaker": "할머니",
+            "content": "아이ㄱ…",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 30,
+            "prevId": 29,
+            "nextId": 31,
+            "effects": [],
+            "speaker": " ",
+            "content": "(콰당!)",
+            "characters": [],
+            "order": []
+        },
+        {
+            "id": 31,
+            "prevId": 30,
+            "nextId": 32,
+            "effects": [],
+            "speaker": "허브",
+            "content": "할머니? 할머니!!",
+            "characters": [],
+            "order": []
+        }
+    ]
+}

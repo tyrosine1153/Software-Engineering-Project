@@ -85,7 +85,7 @@ MonoBehaviour:
     material: feffffffffffffff00000000
   characters:
   - id: 0
-    name: "\uC190\uB140"
+    name: "\uD5C8\uBE0C"
     description: "\uC8FC\uC778\uACF5"
     emotion: 000000000100000002000000
   - id: 1
