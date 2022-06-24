@@ -56,19 +56,28 @@ public class RecipeModel : Singleton<RecipeModel>
         DailyUnlockedRecipes = new List<Recipe>();
     }
     
-    public void AddWeeklyUnlockedRecipes(int id)
+    public void AddDailyUnlockedRecipes(int id)
     {
         DailyUnlockedRecipes.Add(Recipes[id]);
     }
 
-    public void UnlockWeeklyPotions(int week)
+    public void UnlockWeeklyPotions(int day)
     {
-        // 이번주 포션 해금, week 0 = Tutorial
-        var potionRange = WeeklyUnlockPotion[week];
-        
-        for (var i = potionRange.start; i <= potionRange.end; i++)
+        if (day == 0)
         {
-            Recipes[i].IsPotionUnlocked = true;
+            Recipes[0].IsPotionUnlocked = true;
+
+        }
+        else
+        {
+            var week = day / 7;
+            // 이번주 포션 해금, week 0 = Tutorial
+            var potionRange = WeeklyUnlockPotion[week];
+        
+            for (var i = potionRange.start; i <= potionRange.end; i++)
+            {
+                Recipes[i].IsPotionUnlocked = true;
+            }
         }
     }
 

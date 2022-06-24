@@ -11,12 +11,20 @@ public class GameCanvas : Singleton<GameCanvas>
     [SerializeField] private Text dayStartDayText;
     [SerializeField] private GameObject dayEnd;
     [SerializeField] private Text dayEndDayText;
+    [SerializeField] private Text dayEndUnlockedRecipeText;
     [SerializeField] private Button dayEndButton;
     
     [Header("HUD")]
     [SerializeField] private Text dayText;
     [SerializeField] private Button settingsButton;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private Transform recipeBookViewContent;
+    [SerializeField] private GameObject recipeBookPotionLine;
+    [SerializeField] private Button recipeBookButton;
+    [SerializeField] private Animator recipeBookAnimator;
+    private bool isRecipeBookOpen;
+    private static readonly int Show = Animator.StringToHash("Show");
+    private static readonly int Hide = Animator.StringToHash("Hide");
     
     [Header("Story, Craft")]
     public SpriteRenderer[] actors;
@@ -35,6 +43,11 @@ public class GameCanvas : Singleton<GameCanvas>
         {
             settingsPanel.gameObject.SetActive(true);
         });
+        recipeBookButton.onClick.AddListener(() =>
+        {
+            isRecipeBookOpen = !isRecipeBookOpen;
+            recipeBookAnimator.SetTrigger(isRecipeBookOpen ? Show : Hide);
+        });
     }
 
     #region Day
@@ -45,6 +58,8 @@ public class GameCanvas : Singleton<GameCanvas>
         dayText.text = day == 0 ? "튜토리얼" : $"{day}일 차";
         dayStartDayText.text = day == 0 ? "튜토리얼" : $"{day}일 차";
         dayStart.SetActive(true);
+        isRecipeBookOpen = false;
+        recipeBookAnimator.SetTrigger(isRecipeBookOpen ? Show : Hide);
         
         StartCoroutine(CoCloseDayStart());
     }
@@ -59,6 +74,14 @@ public class GameCanvas : Singleton<GameCanvas>
     public void ShowDayEnd(int day)
     {
         dayEndDayText.text = day == 0 ? "튜토리얼" : $"{day}일 차";
+        var str = "";
+        foreach (var unlockedRecipe in RecipeModel.Instance.DailyUnlockedRecipes)
+        {
+            var potion = DataManager.Instance.potions[unlockedRecipe.PotionId];
+            str += $"{potion.name}\n";
+        }
+
+        dayEndUnlockedRecipeText.text = str;
         // Todo : 오늘 공개된 레시피 출력
         dayEnd.SetActive(true);
         
@@ -72,6 +95,26 @@ public class GameCanvas : Singleton<GameCanvas>
 
     #endregion
 
+    public void RecipeBookUpdate()
+    {
+        var lines = recipeBookViewContent.GetComponentsInChildren<PotionLine>();
+        foreach (var line in lines)
+        {
+            Destroy(line.gameObject);
+        }
+
+        foreach (var recipe in RecipeModel.Instance.Recipes)
+        {
+            if(!recipe.IsPotionUnlocked) continue;
+            
+            var line = Instantiate(recipeBookPotionLine, recipeBookViewContent);
+            var potion = DataManager.Instance.potions[recipe.PotionId];
+            line.GetComponent<PotionLine>().Set(SpriteUtil.LoadPotionSprite(potion.id), 
+                potion.name, recipe.IsPotionUnlocked ? potion.material : null);
+        }
+        
+    }
+    
     #region Story/Craft
 
     public void SetStory(int id)
@@ -141,18 +184,11 @@ public class GameCanvas : Singleton<GameCanvas>
         // IsPotionUnlocked => Weekend Unlocked
         // IsRecipeUnlocked => Creat Unlocked
         // Todo : 포션 레시피 해금 여부 결정, 포션 레시피 힌트
-        if (success)
+        if (success && !RecipeModel.Instance.Recipes[potion.id].IsRecipeUnlock)
         {
-            if (RecipeModel.Instance.Recipes[potion.id].IsRecipeUnlock)
-            {
-                // 이미 만든 상태
-            }
-            else
-            {
-                // 만들지 않은 상태
-                RecipeModel.Instance.Recipes[potion.id].IsRecipeUnlock = true;
-                RecipeModel.Instance.AddWeeklyUnlockedRecipes(potion.id);
-            }
+            RecipeModel.Instance.Recipes[potion.id].IsRecipeUnlock = true;
+            RecipeModel.Instance.AddDailyUnlockedRecipes(potion.id);
+            RecipeBookUpdate();
         }
         craftResult.gameObject.SetActive(true);
         craftResult.ShowResult(success, potion);
@@ -160,6 +196,8 @@ public class GameCanvas : Singleton<GameCanvas>
     
     public void GetPotionStory(Potion potion)
     {
+        isRecipeBookOpen = false;
+        recipeBookAnimator.SetTrigger(isRecipeBookOpen ? Show : Hide);
         craftResult.gameObject.SetActive(false);
         
         // First는 맞는 값이 없으면 exception 발생. 근데 정해진 선택지 외의 값이 들어오면 그에 맞는 스크립트가 필요함
