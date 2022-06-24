@@ -322,7 +322,7 @@
         {
             "id": 31,
             "prevId": 30,
-            "nextId": 32,
+            "nextId": -1,
             "effects": [],
             "speaker": "허브",
             "content": "할머니? 할머니!!",
