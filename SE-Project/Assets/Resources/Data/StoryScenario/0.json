@@ -71,7 +71,7 @@
         },
         {
             "id": 6,
-            "prevId": 5,
+            "prevId": -1,
             "nextId": 7,
             "effects": [],
             "speaker": "할머니",
@@ -160,9 +160,9 @@
             "order": []
         },
         {
-            "id": 16,
-            "prevId": 15,
-            "nextId": 17,
+            "id": 15,
+            "prevId": 14,
+            "nextId": 16,
             "effects": [],
             "speaker": "할머니",
             "content": "호호… 나머지 세 가지 포션에 대해서도 설명해주마. 설명해주는 겸, 간단한 포션을 만들어보자꾸나.",
@@ -242,7 +242,7 @@
         {
             "id": 23,
             "prevId": 22,
-            "nextId": 24,
+            "nextId": -1,
             "effects": [],
             "speaker": "할머니",
             "content": "하나를 실수로 더 넣었으면, 마찬가지로 하나를 더 넣으면 되지.",
@@ -251,7 +251,7 @@
         },
         {
             "id": 24,
-            "prevId": 23,
+            "prevId": -1,
             "nextId": 25,
             "effects": [],
             "speaker": "할머니",

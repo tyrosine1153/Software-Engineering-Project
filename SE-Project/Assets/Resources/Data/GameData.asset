@@ -15,7 +15,9 @@ MonoBehaviour:
   potions:
   - id: 0
     name: "\uC0C1\uCC98 \uD68C\uBCF5\uC758 \uBB3C\uC57D"
-    description: 
+    description: "\uC791\uC740 \uC0C1\uCC98\uB97C \uD68C\uBCF5\uD574 \uC900\uB2E4. 
+      \uB9CE\uC774 \uBA39\uC744 \uC218\uB85D \uD6A8\uACFC\uAC00 \uD06C\uB2E4. \uB2EC\uB2EC\uD55C
+      \uD5A5\uAE30\uAC00 \uB09C\uB2E4."
     potionType: 0
     material: 030000000200000001000000
   - id: 1

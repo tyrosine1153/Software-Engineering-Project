@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,12 @@ public class Craft : MonoBehaviour
     [SerializeField] private Button[] materialButtons;
     [SerializeField] private Text[] materialCountTexts;
 
+    [SerializeField] private GameObject tutorialPage;
+    
+    [SerializeField] private Text tutorialSpeakerText;
+    [SerializeField] private Text tutorialStoryText;
+    [SerializeField] private Button nextTutorialStoryButton;
+    [SerializeField] private Button prevTutorialStoryButton;
 
     private const int TotalLimit = 10000; // 최대 재료 추가 횟수
     private const int MaterialLimit = 5; // 재료당 최대 추가 횟수
@@ -24,6 +31,9 @@ public class Craft : MonoBehaviour
         resetButton.onClick.AddListener(ResetPotionMaterial);
         submitButton.onClick.AddListener(MakePotion);
 
+        nextTutorialStoryButton.onClick.AddListener(TutorialNextButton);
+        prevTutorialStoryButton.onClick.AddListener(TutorialPrevButton);
+        
         var materialCount = Enum.GetValues(typeof(Material)).Length;
         for (var i = 0; i < materialButtons.Length; i++)
         {
@@ -42,6 +52,54 @@ public class Craft : MonoBehaviour
         }
     }
 
+    private int _currentId = -1;
+    
+    private void OnEnable()
+    {
+        tutorialPage.SetActive(GameManager.Instance.currentDay == 0);
+        _currentId = 6;
+        var story = DataManager.Instance.storyScenario.FirstOrDefault(scenario => scenario.id == _currentId);
+
+        MoveCheck(story);
+    }
+
+    public void TutorialNextButton()
+    {
+        var beforeStory = DataManager.Instance.storyScenario.FirstOrDefault(scenario => scenario.id == _currentId);
+        _currentId = beforeStory.nextId;
+        var story = DataManager.Instance.storyScenario.FirstOrDefault(scenario => scenario.id == _currentId);
+        _currentId = story.id;
+        
+        MoveCheck(story);
+    }
+    
+    public void TutorialPrevButton()
+    {
+        var beforeStory = DataManager.Instance.storyScenario.FirstOrDefault(scenario => scenario.id == _currentId);
+        _currentId = beforeStory.prevId;
+        var story = DataManager.Instance.storyScenario.FirstOrDefault(scenario => scenario.id == _currentId);
+        _currentId = story.id;
+        
+        MoveCheck(story);
+    }
+
+    private void MoveCheck(StoryScenario story)
+    {
+        if (story == null)
+        {
+            print("Story is null");
+            return;
+        }
+        
+        print($"{_currentId} : {story.prevId} <- {story.id} -> {story.nextId}");
+        
+        tutorialSpeakerText.text = story.speaker;
+        tutorialStoryText.text = story.content;
+        
+        nextTutorialStoryButton.gameObject.SetActive(story.nextId != -1);
+        prevTutorialStoryButton.gameObject.SetActive(story.prevId != -1);
+    }
+    
     // 조합 데이터 초기화
     private void ResetPotionMaterial()
     {

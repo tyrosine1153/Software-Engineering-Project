@@ -69,7 +69,7 @@ MonoBehaviour:
       nextScenarioID: 24
       result: 0
   - id: 6
-    prevId: 5
+    prevId: -1
     nextId: 7
     effects: 
     speaker: "\uD560\uBA38\uB2C8"
@@ -154,9 +154,9 @@ MonoBehaviour:
       \uC5EC\uC12F \uAC1C\uC796\uC544\uC694. \uB098\uBA38\uC9C0\uB294\uC694?"
     characters: []
     order: []
-  - id: 16
-    prevId: 15
-    nextId: 17
+  - id: 15
+    prevId: 14
+    nextId: 16
     effects: 
     speaker: "\uD560\uBA38\uB2C8"
     content: "\uD638\uD638\u2026 \uB098\uBA38\uC9C0 \uC138 \uAC00\uC9C0 \uD3EC\uC158\uC5D0
@@ -231,7 +231,7 @@ MonoBehaviour:
     order: []
   - id: 23
     prevId: 22
-    nextId: 24
+    nextId: -1
     effects: 
     speaker: "\uD560\uBA38\uB2C8"
     content: "\uD558\uB098\uB97C \uC2E4\uC218\uB85C \uB354 \uB123\uC5C8\uC73C\uBA74,
@@ -240,7 +240,7 @@ MonoBehaviour:
     characters: []
     order: []
   - id: 24
-    prevId: 23
+    prevId: -1
     nextId: 25
     effects: 
     speaker: "\uD560\uBA38\uB2C8"
@@ -301,7 +301,7 @@ MonoBehaviour:
     order: []
   - id: 31
     prevId: 30
-    nextId: 32
+    nextId: -1
     effects: 
     speaker: "\uD5C8\uBE0C"
     content: "\uD560\uBA38\uB2C8? \uD560\uBA38\uB2C8!!"
