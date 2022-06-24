@@ -31,6 +31,13 @@ public class Story : MonoBehaviour
         // if (currentStoryScenario.effects[(int)EffectType.None] != 1) { }
         // else { }
 
+        if (currentStoryScenario.effects.Length == 2)
+        {
+            var startIndex = currentStoryScenario.effects[0];
+            var endIndex = currentStoryScenario.effects[1];
+            CameraControl.Instance.ZoomCamera(startIndex, endIndex);
+        }
+        
         foreach (var scenarioCharacter in currentStoryScenario.characters)
         {
             if(scenarioCharacter == null) continue;

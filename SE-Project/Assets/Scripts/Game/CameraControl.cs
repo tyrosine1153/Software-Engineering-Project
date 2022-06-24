@@ -3,7 +3,7 @@ using System.Linq;
 using Cinemachine;
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour
+public class CameraControl : Singleton<CameraControl>
 {
     private const float DefaultSize = 5f;
     private const float DefaultPadding = 0.2f;
